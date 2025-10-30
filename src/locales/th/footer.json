@@ -1,0 +1,21 @@
+{
+  "conpany": {
+    "conpany_name":"Softtech Company Limited Thai",
+    "label":"",
+    "desc":"",
+    "address":"No. 735/4 Building D, Room no. D2 05 2nd floor, Srinakarindra road, Suanluang, Bangkok, Thailand 10250"
+  },
+  "contact":{
+    "label":"Contacts",
+    "desc":"",
+    "tel":[{
+        "label": "Phone",
+        "content": "(+66) 093-939-2636"
+    }],
+    "email":[{
+        "label": "email",
+        "content": ""
+    }],
+    "fax":"Registration"
+  }
+}

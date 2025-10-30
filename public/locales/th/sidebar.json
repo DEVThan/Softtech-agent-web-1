@@ -1,0 +1,17 @@
+
+  { 
+    "sidebar" :[
+        
+        {
+            "icon": "UserCircleIcon",
+            "name": "โปรไฟล์ผู้ใช้",
+            "path": "/profile"
+        },
+        {
+            "icon": "GridIcon",
+            "name": "ผลงาน",
+            "path": "/performance"
+        }
+
+    ]
+}

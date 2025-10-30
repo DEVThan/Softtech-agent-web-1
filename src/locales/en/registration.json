@@ -1,0 +1,40 @@
+{
+  "title": "Fill in the information to register",
+  "description": "Fill in your information here.",
+  "form":{
+    "personal":{
+      "label":"",
+      "desc": "",
+      "idcard": "ID Card Number/Passport",
+      "firstname": "First Name",
+      "surname": "SurName",
+      "phonenumber": "Phone Number",
+      "email": "Email",
+      "dateofbirth": "Date Of Birth",
+      "fax": "Fax"
+    },
+    "address":{
+      "label":"Address",
+      "desc": "",
+      "address": "Address",
+      "street": "Street",
+      "subdistrict": "Sub District",
+      "district": "District",
+      "province": "Province",
+      "country": "Country",
+      "postalcode":"Postal Code"
+    },
+    "work_location":{
+      "label":"Work Location",
+      "desc": "",
+      "address": "Address",
+      "building":"Building/Village",
+      "street": "Street",
+      "subdistrict": "Sub District",
+      "district": "District",
+      "province": "Province",
+      "country": "Country",
+      "postalcode":"Postal Code"
+    }
+  }
+}

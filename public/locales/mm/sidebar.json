@@ -1,0 +1,37 @@
+
+  { 
+    "sidebar" :[
+        {
+            "icon": "GridIcon",
+            "name": "Dashboard MM",
+            "path": "/",
+            "subItems": [
+                { "name": "Ecommerce", "path": "/", "pro": false }
+            ]
+        },
+        {
+            "icon": "CalenderIcon",
+            "name": "Calendar",
+            "path": "/calendar"
+        },
+        {
+            "icon": "UserCircleIcon",
+            "name": "User Profile",
+            "path": "/profile"
+        },
+        {
+            "icon": "GridIcon",
+            "name": "Performance",
+            "path": "/performance"
+        },
+
+        {
+            "icon": "ListIcon",
+            "name": "Forms",
+            "path": "",
+            "subItems": [
+                { "name": "Form Elements", "path": "/form-elements", "pro": false }
+            ]
+        }
+    ]
+}

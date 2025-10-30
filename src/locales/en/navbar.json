@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "home":"Home",
+    "product":"Products",
+    "aboutus":"About us",
+    "contactus":"Contact us"
+  },
+  "authen_navbar":{
+    "signin":"Sigin",
+    "regis":"Registration"
+  }
+}

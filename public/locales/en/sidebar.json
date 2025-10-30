@@ -1,0 +1,15 @@
+
+{ 
+    "sidebar" :[
+        {
+            "icon": "UserCircleIcon",
+            "name": "User Profile",
+            "path": "/profile"
+        },
+        {
+            "icon": "GridIcon",
+            "name": "Performance",
+            "path": "/performance"
+        }
+    ]
+}

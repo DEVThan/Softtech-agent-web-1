@@ -1,0 +1,40 @@
+{
+  "title": "กรอกข้อมูลเพื่อลงทะเบียน",
+  "description": "กรอกข้อมูลของคุณที่นี่",
+  "form":{
+    "personal":{
+      "label":"ข้อมูลส่วนตัว",
+      "desc": "",
+      "idcard": "หมายเลขบัตรประชาชน/หนังสือเดินทาง",
+      "firstname": "ชื่อ",
+      "surname": "นามสกุล",
+      "phonenumber": "เบอร์โทรศัพท์",
+      "email": "อีเมล์",
+      "dateofbirth": "วันเกิด",
+      "fax": "แฟกซ์"
+    },
+    "address":{
+      "label":"ที่อยู่ปัจจุบัน",
+      "desc": "",
+      "address": "ที่อยู่",
+      "street": "ถนน",
+      "subdistrict": "แขวง/ตำบล",
+      "district": "เขต/อำเภอ",
+      "province": "จังหวัด",
+      "country": "Country",
+      "postalcode":"รหัสไปรษณีย์"
+    },
+    "work_location":{
+      "label":"สถานที่ทำงาน",
+      "desc": "",
+      "address": "ที่อยู่",
+      "building":"อาคาร",
+      "street": "ถนน",
+      "subdistrict": "แขวง/ตำบล",
+      "district": "เขต/อำเภอ",
+      "province": "จังหวัด",
+      "country": "Country",
+      "postalcode":"รหัสไปรษณีย์"
+    }
+  }
+}

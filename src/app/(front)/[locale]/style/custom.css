@@ -1,0 +1,231 @@
+
+
+
+
+
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  --bg: #e2e4e4;
+  /* transition: background-color 0.3s, color 0.3s; */
+
+  /* Navbar */
+  --bg-navbar: #0874B6;
+  --text-navbar: #ffffff;
+
+  /* Panel */
+  --content-bg: #e2e4e4;
+  --panel-bg: #ffffff;
+  --panel-color: #474747;
+
+  --title-primary-color: #0874B6;
+
+  --btn-primary-bg: #0874B6;
+  --btn-primary-color: #ffffff;
+
+  /* Footer */
+  --footer-bg: #0874B6;
+  --footer-color: #ffffff;
+}
+
+html.dark {
+  --bg: #e2e4e4;
+
+  /* Navbar */
+  --bg-navbar: var(--color-gray-800);
+  --text-navbar: #ffffff;
+
+  /* Panel */
+  --content-bg: #e2e4e4;
+
+  /* Panel */
+  --panel-bg: #ffffff;
+  --panel-color: #474747;
+
+  /* --title-primary-color: #474747; */
+  --title-primary-color: #0874B6;
+
+  --btn-primary-bg: var(--color-gray-800);
+  --btn-primary-color: #ffffff;
+
+  /* Footer */
+  --footer-bg: var(--color-gray-800);
+  --footer-color: #ffffff;
+}
+
+
+body { background: var(--bg); }
+
+
+/* Navbar */
+.front-header {
+  background: var(--bg-navbar);
+  color: var(--text-navbar);
+}
+
+
+/* Content */
+.content {  background: var(--content-bg) !important; }
+.content .panel { 
+  background: var(--panel-bg) !important;
+  color: var(--panel-color) ; 
+  box-shadow: var(--shadow-md);
+}
+
+.title{ color: var(--title-primary-color) !important; }
+.content .panel .input-elm {
+  background-color:#E4E4E4 ;
+  border-color: #E4E4E4;
+  border-radius: 50px;
+}
+.content .panel .textarea-elm {
+  background-color:#E4E4E4 ;
+  border-color: #E4E4E4;
+  border-radius: 5px;
+}
+
+.content .panel .btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
+}
+
+
+/* Registration page */
+.registration-page h1 {  font-size: 2rem; margin: 1.5rem !important;}
+/* .registration-page form.registration-form label { color: #474747 !important; } */
+
+
+/* Footer */
+footer {
+  background: var(--footer-bg) !important;
+  color: var(---footer-color) !important;
+}
+footer label, footer span{
+  color: var(--footer-color) !important;
+}
+
+
+
+
+
+
+
+/* <= 640px */
+@media (max-width: 639.99px) {
+    body { padding: 0px !important; }
+
+    /* Navbar */
+    .front-header {
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+    .front-header .logos {width: auto; height: 35px;}
+
+    .section {padding: 17px;}
+    /* Panel */
+    .panel {  border-radius: 10px; }
+    .panel .our-product {  width: 50%; height: 100%; }
+    .panel h1 { font-size: 1rem; margin: 1rem !important;}
+    .panel span, .panel p { font-size: 11px;}
+    .panel button, .panel a { font-size: 12px !important;}
+    .panel form.registration-form label { font-size: 0.6rem !important; }
+
+    /* Footer */
+    footer {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+    footer .logos {width: auto; height: 35px;}
+}
+
+/* >= 640px */
+@media (min-width: 640px) {
+    body { padding: 0 8% !important; }
+
+    /* Navbar */
+    .front-header {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .front-header .logos {width: auto; height: 35px;}
+    .front-header nav {font-size: .7rem; }
+
+    /* .section {padding: 5px;} */
+    /* Panel */
+    .panel {  border-radius: 10px; }
+    .panel .our-product {  width: 50%; height: 100%; }
+    .panel h1 { font-size: 1rem; margin: 1rem !important;}
+    .panel span, .panel p { font-size: 11px;}
+    .panel button, .panel a { font-size: 12px !important;}
+    .panel form.registration-form label { font-size: 0.6rem !important; }
+    
+    /* Footer */
+    footer {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-top: 1rem;
+    }
+    footer .logos {width: auto; height: 35px;}
+}
+
+/* >= 768px */
+@media (min-width: 768px) {
+    body { padding: 0 8% !important; }
+
+    /* Navbar */
+    .front-header {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .front-header .logos {width: auto; height: 35px;}
+    .front-header nav {font-size: .8rem; }
+
+    /* Panel */
+    .panel {  border-radius: 10px; }
+    .panel .our-product {  width: 100%; height: 100%; }
+    .panel h1 { font-size: 1rem; margin: 1rem !important;}
+    .panel span, .panel p { font-size: 13px;}
+    .panel button, .panel a { font-size: 13px !important;}
+    .panel form.registration-form label { font-size: 0.7rem !important; }
+
+    /* Footer */
+    footer {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-top: 1rem;
+    }
+    footer .logos {width: auto; height: 35px;}
+}
+
+/* >= 1024px */
+@media (min-width: 1024px) {
+    body { padding: 0 10% !important; }
+
+    /* Navbar */
+    .front-header {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    .front-header .logos {width: auto; height: 35px;}
+    .front-header nav {font-size: .8rem; }
+
+    /* Panel */
+    .panel {  border-radius: 10px; }
+    .panel .our-product {  width: 100%; height: 100%; }
+    .panel h1 { font-size: 1.5rem; margin: 1.5rem !important;}
+    .panel span, .panel p { font-size: 13px;}
+    .panel button, .panel a { font-size: 13px !important;}
+    .panel form.registration-form label { font-size: 0.7rem !important; }
+    
+    /* Footer */
+    footer {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        margin-top: 1rem;
+    }
+    footer .logos {width: auto; height: 35px;}
+}

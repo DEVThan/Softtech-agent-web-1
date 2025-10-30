@@ -1,0 +1,15 @@
+{
+  "button": {
+    "submit":"submit",
+    "cancel":"Cancel",
+    "confirm":"Confirm",
+    "close":"Close",
+    "open":"Open",
+    "add":"Add",
+    "edit":"Edit",
+    "readmore":"ဆက်လက်ဖတ်ရှုရန်",
+    "register":"Register"
+  },
+  "modal": ""
+}
+

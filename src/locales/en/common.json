@@ -1,0 +1,14 @@
+{
+  "button": {
+    "submit":"submit",
+    "cancel":"Cancel",
+    "confirm":"Confirm",
+    "close":"Close",
+    "open":"Open",
+    "add":"Add",
+    "edit":"Edit",
+    "readmore":"Read more",
+    "register":"Register"
+  },
+  "modal": ""
+}

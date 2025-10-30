@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "home":"หน้าหลัก",
+    "product":"สินค้า",
+    "aboutus":"เกี่ยวกับเรา",
+    "contactus":"ติดต่อเรา"
+  },
+  "authen_navbar":{
+    "signin":"เข้าสู่ระบบ",
+    "regis":"ลงทะเบียน"
+  }
+}
