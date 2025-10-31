@@ -15,7 +15,7 @@ export default async function HomePage({ params }: HomePageProps) {
     <div className="content">
 
       <div className="section mt-0 sm:mt-2 md:mt-8">
-        <div className='text-center'><label htmlFor="" className='text-[#0874B6] dark:text-[#474747]  font-bold'>PRODUCTS</label></div>
+        <div className='text-center'><label htmlFor="" className='title text-[#0874B6] dark:text-[#474747]  font-bold'>PRODUCTS</label></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-2 gap-4">
           <div className="panel mb-2" >
             <div className="flex flex-col items-center text-center p-5">

@@ -19,7 +19,7 @@ export default async function HomePage({ params }: HomePageProps) {
       {/* </div> */}
 
       <div className="section mt-0 sm:mt-2 md:mt-8">
-        <div className='text-center'><label htmlFor="" className='text-[#0874B6] dark:text-[#474747] font-bold'>OUR PRODUCTS</label></div>
+        <div className='text-center'><label htmlFor="" className='title text-[#0874B6] dark:text-[#474747] font-bold'>OUR PRODUCTS</label></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-2 gap-4">
           
           <div className="panel mb-2" >
@@ -65,7 +65,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </div>
 
       <div className="section">
-        <div className='text-center mt-3'><label htmlFor="" className='text-[#0874B6] dark:text-[#474747] font-bold'>ABOUT US</label></div>
+        <div className='text-center mt-3'><label htmlFor="" className='title text-[#0874B6] dark:text-[#474747] font-bold'>ABOUT US</label></div>
         <div className="flex flex-col sm:flex-row gap-4 mt-2  panel  px-2 py-2 mb-4">
           <div className='basis-1/3'>
             <div  className='h-[150px] sm:h-[200px] md:h-[200px] lg:h-[200px]'>
