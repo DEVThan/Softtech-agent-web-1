@@ -24,6 +24,18 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/:path*', // ให้เข้าถึงหน้าอื่นตามปกติ
+        destination: '/:path*',
+      },
+    ];
+  },
+  // experimental: {
+  //   middleware: true, // เพิ่ม middleware นี้
+  //   middlewareRewrites: true, // เปิดใช้งาน middleware rewrites
+  // },
 };
 
 export default nextConfig;

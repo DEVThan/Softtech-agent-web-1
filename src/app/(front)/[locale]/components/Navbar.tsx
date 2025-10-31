@@ -53,7 +53,7 @@ export default function Navbar({ nav }: NavbarProps) {
   return (
     <header className="front-header bg-[#0874B6] dark:bg-gray-800  shadow  transition-colors px-6 sm:px-6 py-4">
       <div className="flex items-center justify-between">
-        <a  key={params.locale} href={`/${params.locale}`} className="text-2xl hover:underline">
+        <a  key={params.locale} href={`/${params.locale}/home`} className="text-2xl hover:underline">
           <Image src="/front_images/Logo/sna_white_logo.png" alt="Logo" width={50} height={10} 
           className="object-cover logos focus:outline-none focus:ring-none focus:ring-offset-none w-full h-full"/>
         </a>
