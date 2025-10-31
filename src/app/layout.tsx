@@ -32,6 +32,8 @@ export default function RootLayout({
   return (
     <html lang={route.locale}>
       <head>
+        <link rel="icon" href="/front_images/Logo/sna_logo.png" type="image/png" sizes="32x32" />
+        <link rel="apple-touch-icon" href="/front_images/Logo/sna_logo.png" />
         <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&family=Padauk:wght@400;700&display=swap" rel="stylesheet" />
       </head>
 
