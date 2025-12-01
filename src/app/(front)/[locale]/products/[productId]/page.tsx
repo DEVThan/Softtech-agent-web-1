@@ -1,7 +1,7 @@
 // "use client"
 import Image from 'next/image';
 
-export default async function Page({ params }: { params: { productId: string } }) {
+export default async function Page({ params }: { params: Promise<{ productId: string }> }) {
   const { productId } = await params;
   let path = "/front_images/products/product_spec/spec_dish60cm.jpg";
   switch (productId) {

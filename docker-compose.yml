@@ -1,0 +1,16 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: softtech-agent-web
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - PUBLIC_HOST_API=203.78.103.157
+      - PUBLIC_PORT_API=3006
+      - NEXT_PUBLIC_API_URL=http://203.78.103.157:3006
+      - NEXT_PUBLIC_API_KEY=abcdef123456
