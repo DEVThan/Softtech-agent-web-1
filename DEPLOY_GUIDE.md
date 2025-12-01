@@ -2,13 +2,15 @@
 
 ## สารบัญ
 1. [ข้อกำหนดเบื้องต้น](#ข้อกำหนดเบื้องต้น)
-2. [ขั้นตอนที่ 1: เตรียมไฟล์บนเครื่อง Local](#ขั้นตอนที่-1-เตรียมไฟล์บนเครื่อง-local)
-3. [ขั้นตอนที่ 2: Upload ไฟล์ไปยัง Server](#ขั้นตอนที่-2-upload-ไฟล์ไปยัง-server)
-4. [ขั้นตอนที่ 3: Build และรัน Docker บน Server](#ขั้นตอนที่-3-build-และรัน-docker-บน-server)
-5. [ขั้นตอนที่ 4: ตั้งค่า Nginx สำหรับ Subdomain](#ขั้นตอนที่-4-ตั้งค่า-nginx-สำหรับ-subdomain)
-6. [ขั้นตอนที่ 5: ทดสอบเว็บไซต์](#ขั้นตอนที่-5-ทดสอบเว็บไซต์)
-7. [คำสั่งที่ใช้บ่อย](#คำสั่งที่ใช้บ่อย)
-8. [การแก้ไขปัญหา](#การแก้ไขปัญหา)
+2. [ทำความเข้าใจ: Subdomain ทำงานอย่างไร](#ทำความเข้าใจ-subdomain-ทำงานอย่างไร)
+3. [ขั้นตอนที่ 1: ตั้งค่า DNS สำหรับ Subdomain](#ขั้นตอนที่-1-ตั้งค่า-dns-สำหรับ-subdomain)
+4. [ขั้นตอนที่ 2: เตรียมไฟล์บนเครื่อง Local](#ขั้นตอนที่-2-เตรียมไฟล์บนเครื่อง-local)
+5. [ขั้นตอนที่ 3: Upload ไฟล์ไปยัง Server](#ขั้นตอนที่-3-upload-ไฟล์ไปยัง-server)
+6. [ขั้นตอนที่ 4: Build และรัน Docker บน Server](#ขั้นตอนที่-4-build-และรัน-docker-บน-server)
+7. [ขั้นตอนที่ 5: ตั้งค่า Nginx สำหรับ Subdomain](#ขั้นตอนที่-5-ตั้งค่า-nginx-สำหรับ-subdomain)
+8. [ขั้นตอนที่ 6: ทดสอบเว็บไซต์](#ขั้นตอนที่-6-ทดสอบเว็บไซต์)
+9. [คำสั่งที่ใช้บ่อย](#คำสั่งที่ใช้บ่อย)
+10. [การแก้ไขปัญหา](#การแก้ไขปัญหา)
 
 ---
 
@@ -38,9 +40,119 @@
 
 ---
 
-## ขั้นตอนที่ 1: เตรียมไฟล์บนเครื่อง Local
+## ทำความเข้าใจ: Subdomain ทำงานอย่างไร
 
-### 1.1 สร้างไฟล์ Dockerfile
+### ภาพรวมการทำงาน
+
+เมื่อ User เข้า `http://agent.softtechnw.com` จะเกิดขั้นตอนดังนี้:
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         Flow การทำงานของ Subdomain                        │
+└─────────────────────────────────────────────────────────────────────────┘
+
+    User Browser
+         │
+         │ 1. พิมพ์ http://agent.softtechnw.com
+         ▼
+    ┌─────────────┐
+    │     DNS     │  2. ถาม DNS ว่า agent.softtechnw.com อยู่ที่ IP ไหน?
+    │   Server    │     DNS ตอบ: 203.78.103.157
+    └─────────────┘
+         │
+         │ 3. Browser ส่ง request ไปที่ 203.78.103.157:80
+         ▼
+    ┌─────────────────────────────────────────────────────────────────┐
+    │                    Server 203.78.103.157                         │
+    │  ┌─────────────┐                                                │
+    │  │    Nginx    │  4. Nginx รับ request                          │
+    │  │   Port 80   │     เห็น Host: agent.softtechnw.com            │
+    │  └──────┬──────┘     จึงส่งต่อไปที่ 127.0.0.1:3000              │
+    │         │                                                        │
+    │         │ proxy_pass http://127.0.0.1:3000                      │
+    │         ▼                                                        │
+    │  ┌─────────────┐                                                │
+    │  │   Docker    │  5. Next.js App รับ request                    │
+    │  │ Container   │     ประมวลผลและส่ง HTML กลับ                    │
+    │  │  Port 3000  │                                                │
+    │  └─────────────┘                                                │
+    └─────────────────────────────────────────────────────────────────┘
+         │
+         │ 6. HTML Response กลับไปที่ Browser
+         ▼
+    User เห็นหน้าเว็บ
+```
+
+### สิ่งที่ต้องตั้งค่า 2 อย่าง
+
+| ลำดับ | ตั้งค่าที่ไหน | ทำอะไร |
+|-------|--------------|--------|
+| 1 | Domain Provider (เช่น GoDaddy, Cloudflare) | ตั้ง DNS Record ให้ subdomain ชี้ไป IP ของ server |
+| 2 | Server (Nginx) | ตั้งค่า reverse proxy ให้ส่ง request ไปที่ Docker container |
+
+---
+
+## ขั้นตอนที่ 1: ตั้งค่า DNS สำหรับ Subdomain
+
+### 1.1 เข้าไปที่ Domain Provider
+
+ไปที่เว็บไซต์ที่คุณซื้อ domain `softtechnw.com` เช่น:
+- GoDaddy
+- Namecheap
+- Cloudflare
+- Google Domains
+
+### 1.2 ไปที่หน้า DNS Management
+
+หาเมนู "DNS", "DNS Management", "DNS Settings" หรือ "Manage DNS"
+
+### 1.3 เพิ่ม DNS Record
+
+กดปุ่ม "Add Record" หรือ "เพิ่ม Record" แล้วใส่ข้อมูลดังนี้:
+
+| Field | ค่าที่ใส่ | คำอธิบาย |
+|-------|----------|----------|
+| Type | `A` | ประเภท Record (A = ชี้ไป IP address) |
+| Name / Host | `agent` | ชื่อ subdomain (จะกลายเป็น agent.softtechnw.com) |
+| Value / Points to | `203.78.103.157` | IP ของ server |
+| TTL | `Auto` หรือ `3600` | Time to live (ปล่อยค่า default ได้) |
+
+### 1.4 บันทึกการตั้งค่า
+
+กด "Save" หรือ "บันทึก"
+
+### 1.5 รอ DNS Propagate
+
+DNS อาจใช้เวลา 5 นาที - 24 ชั่วโมง ในการ propagate (แพร่กระจายไปทั่วโลก)
+
+### 1.6 ตรวจสอบว่า DNS ทำงาน
+
+รันคำสั่งนี้ใน Terminal:
+
+```bash
+nslookup agent.softtechnw.com
+```
+
+หรือ
+
+```bash
+dig agent.softtechnw.com
+```
+
+**ผลลัพธ์ที่ถูกต้อง:** ควรเห็น IP `203.78.103.157`
+
+```
+Name:    agent.softtechnw.com
+Address: 203.78.103.157
+```
+
+> **หมายเหตุ:** ถ้ายังไม่เห็น IP ที่ถูกต้อง ให้รอสักครู่แล้วลองใหม่
+
+---
+
+## ขั้นตอนที่ 2: เตรียมไฟล์บนเครื่อง Local
+
+### 2.1 สร้างไฟล์ Dockerfile
 
 สร้างไฟล์ชื่อ `Dockerfile` ในโฟลเดอร์โปรเจค:
 
@@ -89,7 +201,7 @@ ENV HOSTNAME="0.0.0.0"
 CMD ["node", "server.js"]
 ```
 
-### 1.2 สร้างไฟล์ docker-compose.yml
+### 2.2 สร้างไฟล์ docker-compose.yml
 
 สร้างไฟล์ชื่อ `docker-compose.yml` ในโฟลเดอร์โปรเจค:
 
@@ -114,7 +226,7 @@ services:
 
 > **หมายเหตุ:** `network_mode: host` ทำให้ container ใช้ network ของ host โดยตรง แก้ปัญหา Docker networking
 
-### 1.3 สร้างไฟล์ .dockerignore
+### 2.3 สร้างไฟล์ .dockerignore
 
 สร้างไฟล์ชื่อ `.dockerignore` เพื่อไม่ให้ copy ไฟล์ที่ไม่จำเป็น:
 
@@ -129,7 +241,7 @@ node_modules
 .env.production.local
 ```
 
-### 1.4 แก้ไข next.config.ts
+### 2.4 แก้ไข next.config.ts
 
 เปิดไฟล์ `next.config.ts` และเพิ่ม `output: 'standalone'`:
 
@@ -146,11 +258,11 @@ export default nextConfig;
 
 ---
 
-## ขั้นตอนที่ 2: Upload ไฟล์ไปยัง Server
+## ขั้นตอนที่ 3: Upload ไฟล์ไปยัง Server
 
-### 2.1 เปิด Terminal
+### 3.1 เปิด Terminal
 
-### 2.2 Upload โปรเจคด้วย rsync
+### 3.2 Upload โปรเจคด้วย rsync
 
 รันคำสั่งนี้ (เปลี่ยน path ตามโปรเจคของคุณ):
 
@@ -169,15 +281,15 @@ rsync -avz --delete \
 - `--exclude 'node_modules'` = ไม่ upload node_modules (จะ install ใหม่บน server)
 - `--exclude '.next'` = ไม่ upload build files (จะ build ใหม่บน server)
 
-### 2.3 รอจนเสร็จ
+### 3.3 รอจนเสร็จ
 
 จะเห็นรายการไฟล์ที่ถูก upload ขึ้นมา รอจนเสร็จ
 
 ---
 
-## ขั้นตอนที่ 3: Build และรัน Docker บน Server
+## ขั้นตอนที่ 4: Build และรัน Docker บน Server
 
-### 3.1 SSH เข้า Server
+### 4.1 SSH เข้า Server
 
 ```bash
 sshpass -p '@pe$ajEr3d8#' ssh -o StrictHostKeyChecking=no -p 6789 root@203.78.103.157
@@ -189,13 +301,13 @@ ssh -p 6789 root@203.78.103.157
 # แล้วพิมพ์ password: @pe$ajEr3d8#
 ```
 
-### 3.2 ไปที่โฟลเดอร์โปรเจค
+### 4.2 ไปที่โฟลเดอร์โปรเจค
 
 ```bash
 cd /root/softtech-agent-web
 ```
 
-### 3.3 Build และรัน Docker
+### 4.3 Build และรัน Docker
 
 ```bash
 docker compose up -d --build
@@ -206,7 +318,7 @@ docker compose up -d --build
 - `-d` = รันใน background (detached mode)
 - `--build` = build image ใหม่
 
-### 3.4 รอ Build เสร็จ (ประมาณ 3-5 นาที)
+### 4.4 รอ Build เสร็จ (ประมาณ 3-5 นาที)
 
 ดู logs ระหว่าง build:
 ```bash
@@ -215,7 +327,7 @@ docker compose logs -f
 
 กด `Ctrl+C` เพื่อออกจาก logs
 
-### 3.5 ตรวจสอบว่า Container ทำงาน
+### 4.5 ตรวจสอบว่า Container ทำงาน
 
 ```bash
 docker ps
@@ -225,15 +337,15 @@ docker ps
 
 ---
 
-## ขั้นตอนที่ 4: ตั้งค่า Nginx สำหรับ Subdomain
+## ขั้นตอนที่ 5: ตั้งค่า Nginx สำหรับ Subdomain
 
-### 4.1 สร้างไฟล์ Config สำหรับ Subdomain
+### 5.1 สร้างไฟล์ Config สำหรับ Subdomain
 
 ```bash
 nano /etc/nginx/conf.d/agent.softtechnw.com.conf
 ```
 
-### 4.2 ใส่เนื้อหานี้
+### 5.2 ใส่เนื้อหานี้
 
 ```nginx
 server {
@@ -254,12 +366,12 @@ server {
 }
 ```
 
-### 4.3 บันทึกไฟล์
+### 5.3 บันทึกไฟล์
 
 กด `Ctrl+O` แล้ว `Enter` เพื่อบันทึก
 กด `Ctrl+X` เพื่อออก
 
-### 4.4 ทดสอบ Config
+### 5.4 ทดสอบ Config
 
 ```bash
 nginx -t
@@ -271,7 +383,7 @@ nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
 
-### 4.5 Reload Nginx
+### 5.5 Reload Nginx
 
 ```bash
 nginx -s reload
@@ -284,9 +396,9 @@ systemctl reload nginx
 
 ---
 
-## ขั้นตอนที่ 5: ทดสอบเว็บไซต์
+## ขั้นตอนที่ 6: ทดสอบเว็บไซต์
 
-### 5.1 ทดสอบจาก Server
+### 6.1 ทดสอบจาก Server
 
 ```bash
 curl http://127.0.0.1:3000
@@ -294,7 +406,7 @@ curl http://127.0.0.1:3000
 
 ถ้าเห็น HTML แสดงว่า Next.js ทำงาน
 
-### 5.2 ทดสอบจาก Browser
+### 6.2 ทดสอบจาก Browser
 
 เปิด Browser แล้วไปที่:
 ```
