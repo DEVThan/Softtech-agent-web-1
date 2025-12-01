@@ -31,7 +31,10 @@ export default function SigninPage() {
       const login = `${process.env.NEXT_PUBLIC_API_URL}/admin/login`;
       const res = await fetch(login, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json", 
+          "country": route.locale
+        },
         body: JSON.stringify({ username, password }),
       });
 
@@ -85,6 +88,7 @@ export default function SigninPage() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your username"
               required
               className="input-elm mt-1 block w-full rounded-md border border-gray-300 dark:border-gray-600 
               px-3 py-2 text-sm shadow-sm 
@@ -101,6 +105,7 @@ export default function SigninPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your passsword"
               required
               className="input-elm mt-1 block w-full  border border-gray-300 dark:border-gray-600 
               px-3 py-2 text-sm shadow-sm 

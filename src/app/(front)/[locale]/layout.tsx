@@ -24,9 +24,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       {/* <Sidebar /> */}
 
       {/* Main content */}
-      <div className="flex flex-col flex-1">
+      <div className="flex flex-col flex-1  min-h-screen">
         <Navbar nav={nav} />
-        <main className="overflow-y-auto"> {children} </main>
+        <main className="flex-grow overflow-y-auto"> {children} </main>
         <Footer footer={footer} />
       </div> 
     </div>

@@ -64,17 +64,20 @@ export default function Navbar({ nav }: NavbarProps) {
               <div className="flex flex-row items-center">
                 {navbar.map((menu, i) => (
                   <div className=" pl-6" key={`${menu.label}-${i}`}>
-                    <a href={menu.href} className={`text-[13px] hover:underline 
-                    ${ pathname === menu.href ? 'font-bold text-[#474747]' : 'text-[#fff]' }`
+                    <a href={menu.href} className={ 
+                      pathname.startsWith(menu.href)
+                      ? 'text-[13px] nav-active-color no-underline font-bold text-[#474747]'
+                      : 'text-[13px] text-[#fff] underline' 
                     }> {menu.label} </a>
                   </div>
                 ))}
                 {authen_navbar.map((menu, j) => (
                   <div className=" pl-6" key={`${menu.label}-${j}`}>
-                    <a href={menu.href} className={`text-[13px] hover:underline ${
-                   pathname === menu.href ? 'font-bold text-[#474747]' : 'text-[#fff]' }`}>
-                      {menu.label}
-                    </a>
+                    <a href={menu.href} className={ 
+                      pathname.startsWith(menu.href)
+                      ? 'text-[13px] nav-active-color no-underline font-bold text-[#474747]'
+                      : 'text-[13px] text-[#fff] underline' 
+                    }> {menu.label} </a>
                   </div>
                 ))}
               </div>
@@ -132,17 +135,19 @@ export default function Navbar({ nav }: NavbarProps) {
             flex flex-col items-center justify-center gap-8 z-40 transition-colors">
             <button className="absolute top-6 right-6 text-[#fff] dark:text-[#fff] text-xl" onClick={() => setIsOpen(false)} > &times; </button>
             {navbar.map((menu, i) => (
-              <a  key={`${menu.label}-${i}`} href={menu.href} className={`hover:underline ${
-                   pathname === menu.href ? 'font-bold text-[#474747]' : 'text-[#fff]' }`} onClick={() => setIsOpen(false)} >
-                {menu.label}
-              </a>
+              <a key={`${i}`}  href={menu.href} className={ 
+                pathname.startsWith(menu.href)
+                ? 'text-[13px] nav-active-color no-underline font-bold text-[#474747]'
+                : 'text-[13px] text-[#fff] underline' 
+              }> {menu.label} </a>
             ))}
             <div className="w-full px-10"> <hr className="border-t border-white/90 dark:border-gray-600" /> </div>
             {authen_navbar.map((item,k) => (
-              <a  key={`${item.label}-${k}`} href={item.href} className={`hover:underline ${
-                   pathname === item.href ? 'font-bold text-[#474747]' : 'text-[#fff]' }`} onClick={() => setIsOpen(false)} >
-                {item.label}
-              </a>
+              <a key={`${item.label}-${k}`}  href={item.href} className={ 
+                pathname.startsWith(item.href)
+                ? 'text-[13px] nav-active-color no-underline font-bold text-[#474747]'
+                : 'text-[13px] text-[#fff] underline' 
+              }>{item.label}</a>
             ))}
           </div>
         )}

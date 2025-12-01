@@ -73,7 +73,7 @@ export default function Profile() {
         // if (storedEmailAddress) setEmailAddress(storedEmailAddress);
 
       } else {
-        if (!data.status && data.message === "Invalid token") { router.push(`/${locale}/signin`); return;  }
+        if (!data.status && (data.message === "Invalid token")) { router.push(`/${locale}/signin`); return;  }
       }
     } catch (err) {
       console.error("Fetch error:", err);

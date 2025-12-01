@@ -13,13 +13,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "localhost",
-        port: "3001",
+        hostname: `${process.env.PUBLIC_HOST_API}`,
+        port: `${process.env.PUBLIC_PORT_API}`,
         pathname: "/uploads/**",
       },
       {
         protocol: "https",
-        hostname: "api.myserver.com",
+        hostname: `${process.env.PUBLIC_HOST_API}`,
         pathname: "/uploads/**",
       },
     ],
