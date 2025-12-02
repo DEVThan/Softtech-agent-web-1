@@ -271,7 +271,7 @@ rsync -avz --delete \
   -e "sshpass -p '@pe\$ajEr3d8#' ssh -o StrictHostKeyChecking=no -p 6789" \
   --exclude 'node_modules' \
   --exclude '.next' \
-  /path/to/your/project/ \
+  "/Users/w/Desktop/Softtech Application/project/frontend/softtechnw-agent/" \
   root@203.78.103.157:/root/softtech-agent-web/
 ```
 
@@ -533,7 +533,7 @@ rsync -avz --delete \
   -e "sshpass -p '@pe\$ajEr3d8#' ssh -o StrictHostKeyChecking=no -p 6789" \
   --exclude 'node_modules' \
   --exclude '.next' \
-  /path/to/your/project/ \
+  "/Users/w/Desktop/Softtech Application/project/frontend/softtechnw-agent/" \
   root@203.78.103.157:/root/softtech-agent-web/
 ```
 
