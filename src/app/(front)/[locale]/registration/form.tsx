@@ -229,7 +229,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                         <input type="text" id="country" name="country" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
-                        value={formData.work_country}
+                        value={formData.country}
                         onChange={handleChange}
                         />
                     </div>
