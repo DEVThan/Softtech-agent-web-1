@@ -46,7 +46,7 @@ export default async function HomePage({ params }: HomePageProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-2 gap-4">
           
           {our_products.map((item, index) => (
-            <div  key={index} className="grid text-center rounded-[10px] mb-2 bg-white shadow-[0_1px_10px_rgba(180,181,181,1.3)]">
+            <div  key={index} className="panel grid text-center rounded-[10px] mb-2 bg-white shadow-[0_1px_10px_rgba(180,181,181,1.3)]">
               <div className=" mb-2" >
                 <div className="flex flex-col items-center text-center">
                   <div className="flex justify-center items-center w-full h-[150px] pt-4">
@@ -62,7 +62,7 @@ export default async function HomePage({ params }: HomePageProps) {
                     <p className="text-[11px] md:text-[13px] text-gray-600">{item.decs}</p>
                     <div className="mt-4">
                       <a type="button" href={`/${locale}/products/${item.product_code}`}
-                        className="bg-[#0874B6] text-[15px] text-white px-4 py-2 rounded-3xl mt-2 hover:underline shadow-[0_1px_10px_rgba(180,181,181,1.3)]"
+                        className="btn-primary bg-[#0874B6] dark:bg-gray-800 w-auto text-white px-4 py-2 rounded-3xl mt-2 hover:underline shadow-[0_1px_10px_rgba(180,181,181,1.3)]"
                       >{common.button.readmore} </a>
                     </div>
                   </div>
@@ -70,6 +70,7 @@ export default async function HomePage({ params }: HomePageProps) {
               </div>
             </div>
           ))}
+
           {/* <div className="panel mb-2" >
             <div className="flex flex-col items-center text-center p-5">
               <div className='mt-2 flex justify-center'>
