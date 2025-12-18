@@ -372,21 +372,21 @@ const AppSidebar: React.FC = () => {
           !isExpanded && !isHovered ? "lg:justify-center" : "justify-start"
         }`}
       >
-        <Link href="/">
+        <Link href="#">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
               <Image
                 className="dark:hidden"
                 // width={150} height={40} src="/images/logo/logo.svg"
-                // width={50} height={40} src={`/images/logo/sna_logo.png`}
-                width={125} height={40} src={`/images/logo/snw_agent_logo_landscape.png`}
+                width={50} height={40} src={`/images/logo/sna_logo.png`}
+                // width={125} height={40} src={`/images/logo/snw_agent_logo_landscape.png`}
                 alt="Logo"
               />
               <Image
                 className="hidden dark:block"
                 // width={150} height={40} src="/images/logo/logo-dark.svg"
-                // width={50} height={40} src={`/images/logo/sna_logo.png`}
-                width={125} height={40} src={`/images/logo/snw_agent_logo_landscape.png`}
+                width={50} height={40} src={`/images/logo/sna_logo.png`}
+                // width={125} height={40} src={`/images/logo/snw_agent_logo_landscape.png`}
                 alt="Logo"
               />
             </>

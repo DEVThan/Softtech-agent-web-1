@@ -43,15 +43,20 @@ export default function UserDropdown() {
   }
 
   const route = useParams<{ locale: string }>();
+  const baseAPIUrl = process.env.NEXT_PUBLIC_API_URL;
+  const avatarSrc =
+  typeof agentThumnal === "string" &&
+  agentThumnal.startsWith("uploads/") &&
+  baseAPIUrl
+    ? `${baseAPIUrl}/${agentThumnal}`
+    : "/images/user/owner.jpg";
+      
   return (
     <div className="relative">
       <button onClick={toggleDropdown}  className="flex items-center text-gray-700 dark:text-gray-400 dropdown-toggle" >
         <span className="relative mr-3 overflow-hidden rounded-full border-2 border-gray-900 dark:border-[#0874B6] h-11 w-11">
           <Image
-            src={ agentThumnal && agentThumnal !== "null"
-                ? `${process.env.NEXT_PUBLIC_API_URL}/${agentThumnal}`
-                : "/images/user/owner.jpg"
-            }
+            src={`${avatarSrc}`}
             alt="User"
             fill
             className="object-cover object-center"

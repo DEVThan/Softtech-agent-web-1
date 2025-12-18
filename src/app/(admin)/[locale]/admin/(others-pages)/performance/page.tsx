@@ -321,7 +321,7 @@ export default function PerfomancePage() {
         <div className={`rounded-2xl border border-gray-200 bg-white dark:border-gray-800 dark:bg-white/[0.03]`} >
           <div className="px-6 py-5">
             <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
-              <h3 className="text-base font-medium text-gray-800 dark:text-white/90 text-center xl:text-lef"> Performance </h3>
+              <h3 className="text-base font-medium text-gray-800 dark:text-white/90 text-center xl:text-lef"> Jobs </h3>
               <button
                 onClick={openAddModal}
                 className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
@@ -412,7 +412,7 @@ export default function PerfomancePage() {
                             isHeader
                             className="px-5 py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
                           >
-                            Performance
+                            Job
                           </TableCell>
                           <TableCell
                             isHeader
@@ -518,8 +518,8 @@ export default function PerfomancePage() {
         <Modal isOpen={isAddModalOpen} onClose={closeAddModal} className="max-w-[700px] m-4">
           <div className="relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11 max-h-[70vh]">
             <div className="px-2 pr-14">
-              <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90"> Add Performance </h4>
-              <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7"> Insert your performance. </p>
+              <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90"> Add Job </h4>
+              <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7"> Insert your Job. </p>
             </div>
             <form onSubmit={handleAddSubmit} encType="multipart/form-data"  className="flex flex-col">
               <div className="custom-scrollbar overflow-y-auto px-2 pb-3">
@@ -527,7 +527,7 @@ export default function PerfomancePage() {
                   <Input type="hidden" name="agentcode"  defaultValue={agentcode || ""} />
                   <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-1  mb-3">
                     <div className="col-span-2 lg:col-span-1">
-                      <Label>Name</Label>
+                      <Label>Job name</Label>
                       <Input type="text" name="name"  {...{ required: true }} />
                     </div>
                     <div className="col-span-2 lg:col-span-1">
@@ -573,6 +573,7 @@ export default function PerfomancePage() {
                         hover:file:bg-brand-700 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10
                         dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:file:bg-brand-800"
                       />
+                      <p className="text-sm">kcsodksdo</p>
                     </div>
 
                   </div>
@@ -591,8 +592,8 @@ export default function PerfomancePage() {
         <Modal isOpen={isEditModalOpen} onClose={closeEditModal} className="max-w-[700px] m-4">
           <div className="relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11 max-h-[70vh]">
             <div className="px-2 pr-14">
-              <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90"> Edit Performance </h4>
-              <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7"> Insert your performance. </p>
+              <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90"> Edit Job </h4>
+              <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7"> Edit your Job. </p>
             </div>
             <form onSubmit={handleEditSubmit} encType="multipart/form-data"  className="flex flex-col">
               <div className="custom-scrollbar overflow-y-auto px-2 pb-3">
@@ -601,7 +602,7 @@ export default function PerfomancePage() {
                   <Input type="hidden" name="performancecode" defaultValue={EditformData?.performancecode || ""}/>
                   <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-1  mb-3">
                     <div className="col-span-2 lg:col-span-1">
-                      <Label>Name</Label>
+                      <Label>Job name</Label>
                       <Input type="text" name="name"  
                         defaultValue={EditformData?.name || ""} 
                         onChange={(e) => setEditFormData({ ...EditformData!, name: e.target.value }) }
@@ -687,6 +688,7 @@ export default function PerfomancePage() {
                         hover:file:bg-brand-700 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10
                         dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:file:bg-brand-800"
                       />
+                      <p className="text-sm font-medium text-gray-700 dark:text-gray-400">You can upload a maximum of 5 images.</p>
                     </div>
                   </div>
                 </div>
@@ -705,19 +707,15 @@ export default function PerfomancePage() {
 
         {/* Viwe Performance Modal */}
         <Modal isOpen={isViewModalOpen} onClose={closeViewModal} className="max-w-[700px] m-4">
-          <div className="relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11 max-h-[70vh]">
+          <div className="relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-6 max-h-[70vh]">
             <div className="px-2 pr-14">
-              <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90"> View Performance </h4>
+              <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90"> View Job </h4>
               {/* <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7"> Insert your performance. </p> */}
             </div>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 xl:grid-cols-1 mt-3">
               <div className="relative inline-block group">
-
                 <Image
-                  src={
-                    
-                    `${process.env.NEXT_PUBLIC_API_URL}/${viewFilePath}`
-                  }
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${viewFilePath}`}
                   alt=" grid"
                   className=" w-full border border-gray-200 rounded-xl dark:border-gray-800"
                   width={338}
@@ -727,10 +725,6 @@ export default function PerfomancePage() {
             </div>
           </div>
         </Modal>
-
-        
-
-
       </div>
     </div>
   );
