@@ -5,6 +5,7 @@
 // import BasicTableOne from "../../../components/tables/BasicTableOne";
 // import { Metadata } from "next";
 import React from "react";
+import { FiPlus, FiEdit, FiTrash2 } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { Eye, Trash2 } from "lucide-react";
 // import { useRouter } from "next/router";
@@ -260,6 +261,17 @@ export default function PerfomancePage() {
     }
     // closeEditModal();
   };
+
+  const [openDelete, setOpenDelete] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<PerformanceModel | null>(null);
+
+  function DeleteModal(item: PerformanceModel) { 
+    setSelectedItem(item);
+    setOpenDelete(true);
+    console.log(item);
+    // openEditModal(); setEditFormData(item);  
+  }
+  
   function fileOnViewModal(id: number,path:string) { 
     setViewFilePath(path);
     openViewModal(); 
@@ -325,20 +337,7 @@ export default function PerfomancePage() {
               <button
                 onClick={openAddModal}
                 className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
-              >
-                <svg
-                  className="w-5 h-5 fill-current"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M10 4a1 1 0 011 1v4h4a1 1 0 110 2h-4v4a1 1 0 11-2 0v-4H5a1 1 0 110-2h4V5a1 1 0 011-1z"
-                  />
-                </svg>
-                Add
-              </button>
+              > <FiPlus size={18} /> Add </button>
             </div>
 
             {/* ✅ Alert  showSuccess = true */}
@@ -435,7 +434,7 @@ export default function PerfomancePage() {
                         {perefomanceResult?.map((item, index) => (
                           
                           <TableRow key={index}>
-                            <TableCell className="px-5 py-4 sm:px-6 text-start">
+                            <TableCell className="px-3 py-1 sm:px-3 text-start">
                               <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 ">
                                   {item.files.length ? (
@@ -458,7 +457,7 @@ export default function PerfomancePage() {
                                 </div>
                               </div>
                             </TableCell>
-                            <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                            <TableCell className="px-3 py-1 text-gray-500 text-start text-theme-sm dark:text-gray-400">
                               <div className="flex -space-x-2">
                                 {item.files.map((item, index) => (
                                   <div key={index} className="w-6 h-6 overflow-hidden border-2 border-gray-900 dark:border-[#0874B6] rounded-full " >
@@ -475,31 +474,41 @@ export default function PerfomancePage() {
                                 ))}
                               </div>
                             </TableCell>
-                            <TableCell className="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">
-                              <div className="flex -space-x-2">
-                                <button
-                                  // onClick={openEditModal}
-                                  onClick={() => EditModal(item)}
-                                  className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-700 shadow-theme-xs hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200 lg:inline-flex lg:w-auto"
-                                >
-                                  <svg
-                                    className="fill-current"
-                                    width="18"
-                                    height="18"
-                                    viewBox="0 0 18 18"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
+                            <TableCell className="px-3 py-1 text-gray-500 text-start text-theme-sm dark:text-gray-400">
+                              <div className="flex gap-2">
+                                {/* Edit */}
+                                <div className="relative group">
+                                  <button
+                                    onClick={() => EditModal(item)}
+                                    className="flex p-1 items-center justify-center bg-white text-gray-700 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-400"
                                   >
-                                    <path
-                                      fillRule="evenodd"
-                                      clipRule="evenodd"
-                                      d="M15.0911 2.78206C14.2125 1.90338 12.7878 1.90338 11.9092 2.78206L4.57524 10.116C4.26682 10.4244 4.0547 10.8158 3.96468 11.2426L3.31231 14.3352C3.25997 14.5833 3.33653 14.841 3.51583 15.0203C3.69512 15.1996 3.95286 15.2761 4.20096 15.2238L7.29355 14.5714C7.72031 14.4814 8.11172 14.2693 8.42013 13.9609L15.7541 6.62695C16.6327 5.74827 16.6327 4.32365 15.7541 3.44497L15.0911 2.78206ZM12.9698 3.84272C13.2627 3.54982 13.7376 3.54982 14.0305 3.84272L14.6934 4.50563C14.9863 4.79852 14.9863 5.2734 14.6934 5.56629L14.044 6.21573L12.3204 4.49215L12.9698 3.84272ZM11.2597 5.55281L5.6359 11.1766C5.53309 11.2794 5.46238 11.4099 5.43238 11.5522L5.01758 13.5185L6.98394 13.1037C7.1262 13.0737 7.25666 13.003 7.35947 12.9002L12.9833 7.27639L11.2597 5.55281Z"
-                                      fill=""
-                                    />
-                                  </svg>
-                                  
-                                </button>
+                                    <FiEdit size={18} />
+                                  </button>
+
+                                  <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2
+                                    whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white
+                                    opacity-0 group-hover:opacity-100 transition">
+                                    Edit
+                                  </span>
+                                </div>
+
+                                {/* Delete */}
+                                <div className="relative group">
+                                  <button
+                                    onClick={() => DeleteModal(item)}
+                                    className="flex p-1 items-center justify-center bg-white text-gray-700 hover:bg-red-50 dark:bg-gray-800 dark:text-gray-400"
+                                  >
+                                    <FiTrash2 size={18} />
+                                  </button>
+
+                                  <span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2
+                                    whitespace-nowrap rounded bg-red-600 px-2 py-1 text-xs text-white
+                                    opacity-0 group-hover:opacity-100 transition">
+                                    Delete
+                                  </span>
+                                </div>
                               </div>
+
                             </TableCell>
                           </TableRow>
                         ))}
@@ -725,6 +734,41 @@ export default function PerfomancePage() {
             </div>
           </div>
         </Modal>
+
+        {/* Delet Performance Modal */}
+        {openDelete && selectedItem && (
+          <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/40">
+            <div className="w-full max-w-md rounded-lg bg-white p-6 dark:bg-gray-800">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Confirm Delete
+              </h2>
+
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                Are you sure you want to delete this item? This action cannot be undone.
+              </p>
+
+              <div className="mt-6 flex justify-end gap-3">
+                <button
+                  onClick={() => setOpenDelete(false)}
+                  className="rounded px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                >
+                  Cancel
+                </button>
+
+                <button
+                  onClick={() => {
+                    console.log("Delete:", selectedItem);
+                    // 👉 call delete API here
+                    setOpenDelete(false);
+                  }}
+                  className="rounded bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
