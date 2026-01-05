@@ -68,10 +68,10 @@ export default function PerfomancePage() {
   const { isOpen: isViewModalOpen, openModal: openViewModal, closeModal: closeViewModal, } = useModal();
   // const { isOpen: isDeleteModalOpen, openModal: openDeleteModal, closeModal: closeDeleteModal, } = useModal();
 
-  const [showInsertSuccessAlert, setShowInsertSuccessAlert] = useState(false);
-  const [showInsertFailAlert, setShowInsertFailAlert] = useState(false);
-  const [showUpdateSuccessAlert, setShowUpdateSuccessAlert] = useState(false);
-  const [showUpdateFailAlert, setShowUpdateFailAlert] = useState(false);
+  // Alert
+  const [messageAlert, setmessageAlert] = useState("");
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showFailAlert, setShowFailAlert] = useState(false);
 
   // File
   const [addMaxFile, setAddMaxFile] = useState(5);
@@ -198,27 +198,27 @@ export default function PerfomancePage() {
       const res = await response.json();
       if (res.status) {
         await fetchProfile(token, agentcode);// ✅ reload profile
-
-        setShowInsertFailAlert(false);
-        setShowInsertSuccessAlert(true); // ✅ แสดง Alert
-        setTimeout(() => setShowInsertSuccessAlert(false), 3000);
+        setmessageAlert("Data has been insert successfully.");
+        setShowFailAlert(false);
+        setShowSuccessAlert(true);
+        setTimeout(() => setShowSuccessAlert(false), 3000);
         closeAddModal();
       } else {
         if (!res.status && res.message === "Invalid token") { router.push(`/${locale}/signin`); return;  }
-        console.error("API Error:", res.message);
-        setShowInsertSuccessAlert(false);
-        setShowInsertFailAlert(true);
-        setTimeout(() => setShowInsertFailAlert(false), 3000); 
+        setmessageAlert("Data has been insert un successfully.");
+        setShowFailAlert(true);
+        setShowSuccessAlert(false);
+        setTimeout(() => setShowFailAlert(false), 3000);
       }
     } catch (error) {
         console.error("Error submitting form:", error);
-        setShowInsertSuccessAlert(false);
-        setShowInsertFailAlert(true);
-        setTimeout(() => setShowInsertFailAlert(false), 3000); 
+        setmessageAlert("Data has been insert un successfully.");
+        setShowFailAlert(true);
+        setShowSuccessAlert(false);
+        setTimeout(() => setShowFailAlert(false), 3000);
     } finally {
       setLoading(false);
     }
-    // closeAddModal();
   };
   function EditModal(item: PerformanceModel) { openEditModal(); setEditFormData(item);  }
   const handleEditSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -237,47 +237,30 @@ export default function PerfomancePage() {
       });
       const res = await response.json();
       if (res.status) {
-        await fetchProfile(token, agentcode);
-
-        setShowUpdateFailAlert(false);
-        setShowUpdateSuccessAlert(true);
-        setTimeout(() => setShowUpdateSuccessAlert(false), 3000);
+        await fetchProfile(token, agentcode);// ✅ reload profile
+        setmessageAlert("Data has been update successfully.");
+        setShowFailAlert(false);
+        setShowSuccessAlert(true);
+        setTimeout(() => setShowSuccessAlert(false), 3000);
         closeEditModal();
       } else {
         if (!res.status && res.message === "Invalid token") { router.push(`/${locale}/signin`); return;  }
-        
         console.error("API Error:", res.message);
-        setShowUpdateSuccessAlert(false);
-        setShowUpdateFailAlert(true);
-        setTimeout(() => setShowUpdateFailAlert(false), 3000); 
+        setmessageAlert("Data has been update un successfully.");
+        setShowFailAlert(true);
+        setShowSuccessAlert(false);
+        setTimeout(() => setShowFailAlert(false), 3000);
       }
     } catch (error) {
         console.error("Error submitting form:", error);
-        setShowUpdateSuccessAlert(false);
-        setShowUpdateFailAlert(true);
-        setTimeout(() => setShowUpdateFailAlert(false), 3000); 
+        setmessageAlert("Data has been update un successfully.");
+        setShowFailAlert(true);
+        setShowSuccessAlert(false);
+        setTimeout(() => setShowFailAlert(false), 3000);
     } finally {
       setLoading(false);
     }
-    // closeEditModal();
   };
-
-  const [openDelete, setOpenDelete] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<PerformanceModel | null>(null);
-
-  function DeleteModal(item: PerformanceModel) { 
-    setSelectedItem(item);
-    setOpenDelete(true);
-    console.log(item);
-    // openEditModal(); setEditFormData(item);  
-  }
-  
-  function fileOnViewModal(id: number,path:string) { 
-    setViewFilePath(path);
-    openViewModal(); 
-    console.log(path);
-    // setEditFormData(item);  
-  }
   const handleDeleteFile = async (performancecode:string,  fileid: number, path:string) => { 
     const isConfirmed = window.confirm("Are you sure you want to delete this file?");
     if (isConfirmed) {
@@ -293,33 +276,23 @@ export default function PerfomancePage() {
       const res = await response.json();
       if (res.status) {
         await fetchProfile(token, agentcode);
-
-        // setShowUpdateFailAlert(false);
-        // setShowUpdateSuccessAlert(true);
-        // setTimeout(() => setShowUpdateSuccessAlert(false), 3000);
         closeEditModal();
-        // openEditModal();
       } else {
         if (!res.status && res.message === "Invalid token") { router.push(`/${locale}/signin`); return;  }
-        
-        // console.error("API Error:", res.message);
-        // setShowUpdateSuccessAlert(false);
-        // setShowUpdateFailAlert(true);
-        // setTimeout(() => setShowUpdateFailAlert(false), 3000); 
       }
-
-      // setEditformData((prev) => ({
-      //   ...prev,
-      //   files: prev.files.filter((f) => f.id !== fileId),
-      // }));
-      // ถ้าต้องการ, ต่อ API delete file ด้วย
     }
-    // setViewFilePath(path);
-    // openViewModal(); 
-    // console.log(path);
-    // setEditFormData(item);  
+  }
+  function fileOnViewModal(id: number,path:string) { 
+    setViewFilePath(path);
+    openViewModal();
   }
 
+  const [openDelete, setOpenDelete] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<PerformanceModel | null>(null);
+  function DeleteModal(item: PerformanceModel) { 
+    setSelectedItem(item);
+    setOpenDelete(true);
+  }
   // Pagination
   const handlePageChange = async (page: number) => { setCurrentPage(page); }; 
 
@@ -342,7 +315,7 @@ export default function PerfomancePage() {
 
             {/* ✅ Alert  showSuccess = true */}
             <AnimatePresence>
-              {showInsertSuccessAlert && ( 
+              {showSuccessAlert && ( 
                 <motion.div
                   key="alert"
                   initial={{ opacity: 0, y: -10 }}
@@ -351,11 +324,10 @@ export default function PerfomancePage() {
                   transition={{ duration: 1 }}
                   className="mt-3"
                 >
-                  <Alert variant="success" title="Success" message="Data has been insert successfully." showLink={false} />
+                  <Alert variant="success" title="Success" message={messageAlert} showLink={false} />
                 </motion.div> 
               )}
-
-              {showInsertFailAlert && ( 
+              {showFailAlert && (
                 <motion.div
                   key="alert"
                   initial={{ opacity: 0, y: -10 }}
@@ -364,33 +336,7 @@ export default function PerfomancePage() {
                   transition={{ duration: 1 }}
                   className="mt-3"
                 >
-                  <Alert variant="warning" title="Warning Message"  message="Data has been insert un successfully." showLink={false} />
-                </motion.div>
-              )}
-
-              {showUpdateSuccessAlert && ( 
-                <motion.div
-                  key="alert"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 1 }}
-                  className="mt-3"
-                >
-                  <Alert variant="success" title="Success"  message="Data has been updated successfully." showLink={false} />
-                </motion.div> 
-              )}
-
-              {showUpdateFailAlert && ( 
-                <motion.div
-                  key="alert"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 1 }}
-                  className="mt-3"
-                >
-                  <Alert variant="warning" title="Warning Message"  message="Data has been updated un successfully." showLink={false} />
+                  <Alert variant="warning" title="Warning Message"  message={messageAlert}  showLink={false} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -537,7 +483,7 @@ export default function PerfomancePage() {
                   <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-1  mb-3">
                     <div className="col-span-2 lg:col-span-1">
                       <Label>Job name</Label>
-                      <Input type="text" name="name"  {...{ required: true }} />
+                      <Input type="text" name="name" required />
                     </div>
                     <div className="col-span-2 lg:col-span-1">
                       <Label>Description</Label>
@@ -582,7 +528,7 @@ export default function PerfomancePage() {
                         hover:file:bg-brand-700 focus:border-brand-300 focus:ring-3 focus:ring-brand-500/10
                         dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:file:bg-brand-800"
                       />
-                      <p className="text-sm">kcsodksdo</p>
+                      <p className="text-sm"></p>
                     </div>
 
                   </div>
@@ -739,32 +685,42 @@ export default function PerfomancePage() {
         {openDelete && selectedItem && (
           <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/40">
             <div className="w-full max-w-md rounded-lg bg-white p-6 dark:bg-gray-800">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-                Confirm Delete
-              </h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white"> Confirm Delete </h2>
 
-              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                Are you sure you want to delete this item? This action cannot be undone.
-              </p>
+              <p className="mt-2 text-md text-gray-600 dark:text-gray-400"> Are you sure you want to delete this item?</p>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400"> This action cannot be undone. </p>
 
               <div className="mt-6 flex justify-end gap-3">
                 <button
                   onClick={() => setOpenDelete(false)}
                   className="rounded px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
-                >
-                  Cancel
-                </button>
+                > Cancel </button>
 
                 <button
-                  onClick={() => {
-                    console.log("Delete:", selectedItem);
-                    // 👉 call delete API here
-                    setOpenDelete(false);
+                  onClick={ async () => {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/delete_performance`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "country" : locale,
+                            "Authorization": `Bearer ${token}`,
+                        },
+                        body: JSON.stringify({ performancecode:selectedItem.performancecode, agentcode:selectedItem.agentcode}),
+                    });
+                    const res = await response.json();
+                    if (res.status) {
+                      await fetchProfile(token, agentcode);
+                      setmessageAlert("Data has been deleted successfully.");
+                      setShowFailAlert(false);
+                      setShowSuccessAlert(true);
+                      setTimeout(() => setShowSuccessAlert(false), 3000);
+                      setOpenDelete(false);
+                    } else {
+                      if (!res.status && res.message === "Invalid token") { router.push(`/${locale}/signin`); return;  }
+                    }
                   }}
                   className="rounded bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700"
-                >
-                  Delete
-                </button>
+                > Delete </button>
               </div>
             </div>
           </div>
