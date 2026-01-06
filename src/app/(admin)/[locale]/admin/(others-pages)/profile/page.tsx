@@ -7,7 +7,7 @@
 import React from "react";
 import { useUser } from "../../../context/UserContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect} from "react";
+import { useState, useEffect, useCallback} from "react";
 import { useRouter, usePathname } from "next/navigation";
 
 import { useModal } from "../../../hooks/useModal";
@@ -42,7 +42,8 @@ export default function Profile() {
   const [showFailAlert, setShowFailAlert] = useState(false);
   // const [editformData, setEditFormData] = useState<AgentModel | null>(null);
 
-  async function fetchProfile() {
+  // async function fetchProfile() {
+  const fetchProfile = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const agentcode = localStorage.getItem("agentcode");
@@ -80,7 +81,7 @@ export default function Profile() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [locale, router]);
   useEffect(() => {
     const tokenStorage = localStorage.getItem("token");
     const agentcodeStorage = localStorage.getItem("agentcode");
@@ -88,7 +89,7 @@ export default function Profile() {
     if (tokenStorage && agentcodeStorage) {
       fetchProfile();
     }
-  },[router, locale]);
+  },[router, locale, fetchProfile]);
 
   if (loading) return <p>Loading profile...</p>;
   if (!agent) return <p>No profile data.</p>;

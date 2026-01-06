@@ -5,8 +5,12 @@ interface AgentProfile {
   // Add other fields as per your API response
 }
 
-const AgentProfilePage = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
+
+const AgentProfilePage = async ({ params }: PageProps) => {
+  const { id } = await params;
 
   let profileData: AgentProfile | null = null;
   let error: string | null = null;
@@ -17,8 +21,8 @@ const AgentProfilePage = async ({ params }: { params: { id: string } }) => {
       throw new Error(`Failed to fetch profile: ${res.statusText}`);
     }
     profileData = await res.json();
-  } catch (err: any) {
-    error = err.message;
+  } catch (err: unknown) {
+    error = err instanceof Error ? err.message : "Unknown error";
   }
 
   return (

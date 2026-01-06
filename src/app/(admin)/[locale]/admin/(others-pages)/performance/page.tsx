@@ -6,7 +6,7 @@
 // import { Metadata } from "next";
 import React from "react";
 import { FiPlus, FiEdit, FiTrash2 } from "react-icons/fi";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Eye, Trash2 } from "lucide-react";
 // import { useRouter } from "next/router";
 // import { useRouter } from "next/navigation";
@@ -81,21 +81,11 @@ export default function PerfomancePage() {
   const [editFileWarningAlert, setEditFileWarningAlert] = useState(false);
   const [editFileWarningAlertMessage, setEditFileWarningAlertMessage] = useState("");
   const [viewFilePath, setViewFilePath] = useState("");
-
-
-  useEffect(() => {
-    const tokenStorage = localStorage.getItem("token");
-    const agentcodeStorage = localStorage.getItem("agentcode");
-    if (!tokenStorage) { router.push(`/${locale}/signin`);  return; }
-    if (tokenStorage && agentcodeStorage) {
-      setToken(tokenStorage);
-      setAgentcode(agentcodeStorage);
-      fetchProfile(tokenStorage, agentcodeStorage);
-    }
-  },[currentPage]);
   
   //get result
-  async function fetchProfile(token: string, agentcode: string) {
+  // async function fetchProfile(token: string, agentcode: string) {
+  const fetchProfile = useCallback(
+    async (token: string, agentcode: string) => {
       try {
         if (!token || !agentcode) { console.warn("No token or agentcode found"); return; }else{}
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/all_performance`, {
@@ -124,7 +114,19 @@ export default function PerfomancePage() {
       } finally {
         setLoading(false);
       }
-  }
+  }, [locale, currentPage, itemsPerPage, router]);
+
+  useEffect(() => {
+    const tokenStorage = localStorage.getItem("token");
+    const agentcodeStorage = localStorage.getItem("agentcode");
+    if (!tokenStorage) { router.push(`/${locale}/signin`);  return; }
+    if (tokenStorage && agentcodeStorage) {
+      setToken(tokenStorage);
+      setAgentcode(agentcodeStorage);
+      fetchProfile(tokenStorage, agentcodeStorage);
+    }
+  },[router, locale, fetchProfile]);
+
   // if (loading){ return <p>Loading profile...</p>;}
   // if (!agent) return <p>No profile data.</p>;
   

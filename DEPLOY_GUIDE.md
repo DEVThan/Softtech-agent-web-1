@@ -562,3 +562,76 @@ docker compose up -d --build
 ---
 
 *สร้างเมื่อ: 1 ธันวาคม 2025*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
+## วิธี Deploy (Build ในเครื่อง แล้ว Upload)
+
+### ขั้นตอนที่ 1: Build Docker Image ในเครื่อง
+
+```bash
+docker build --platform linux/amd64 -t softtech-agent-web . 
+```
+
+รอ ~2-3 นาที
+
+---
+
+### ขั้นตอนที่ 2: Save Image เป็นไฟล์
+
+```bash
+docker save softtech-agent-web | gzip > softtech-agent-web.tar.gz
+```
+
+---
+
+### ขั้นตอนที่ 3: Upload ไฟล์ไป Server
+
+```bash
+scp -P 6789 softtech-agent-web.tar.gz root@203.78.103.157:/root/
+```
+
+ใส่ password เมื่อถาม (ไฟล์ ~200-300MB อาจใช้เวลาสักครู่)
+
+---
+
+### ขั้นตอนที่ 4: SSH เข้า Server แล้ว Load Image
+
+```bash
+ssh root@203.78.103.157 -p 6789
+@pe$ajEr3d8#
+```
+
+แล้วรัน:
+
+```bash
+# Load image
+docker load < /root/softtech-agent-web.tar.gz
+
+# หยุด container เก่า (ถ้ามี)
+docker stop softtech-agent-web 2>/dev/null
+docker rm softtech-agent-web 2>/dev/null
+
+# Start container ใหม่ (ใช้ host network)
+docker run -d --name softtech-agent-web --restart unless-stopped --network host -e NODE_ENV=production -e PORT=3000 -e HOSTNAME=0.0.0.0 softtech-agent-web
+
+# เช็คว่าทำงาน
+docker ps | grep softtechnw
+```
+
+---
+
