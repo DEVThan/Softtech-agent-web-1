@@ -127,7 +127,7 @@ export default function Profile() {
         // setLocalStorageAgentemailaddress(localStorage.getItem("emailaddress") || "");
         // setLocalStorageProfileThumnal(localStorage.getItem("profilethumnal") || "");
 
-        setUser(agentResult.agentname, agentResult.agentsurname, agentResult.telephone, agentResult.emailaddress, agentResult.province, agentResult.thumnal );
+        setUser(agentResult.agentname, agentResult.agentsurname, agentResult.telephone, agentResult.emailaddress, agentResult.province, agentResult.thumbnail );
         
 
 
@@ -206,8 +206,8 @@ export default function Profile() {
                     width={80}
                     height={80}
                     src={
-                      agent?.thumnal
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/${agent.thumnal}`
+                      agent?.thumbnail
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/${agent.thumbnail}`
                         : "/images/user/owner.jpg"
                     }
                     alt="user"
@@ -353,14 +353,14 @@ export default function Profile() {
                     <input  type="hidden" name="agentcode" defaultValue={agent.agentcode}/>
                     <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-1">{/* ✅ Browse Image File */}
                       <div className="col-span-1 lg:col-span-1">
-                        <Label htmlFor="image">Thumnal</Label>
+                        <Label htmlFor="image">Thumbnail</Label>
                         <div className="grid grid-cols-1 gap-5 sm:grid-cols-5 xl:grid-cols-5 mt-3">
                             <div className="relative inline-block group">
                               <Image
                                 // src={`${process.env.NEXT_PUBLIC_API_URL}/${agent.thumnal}`}
                                 src={
-                                  agent?.thumnal
-                                    ? `${process.env.NEXT_PUBLIC_API_URL}/${agent.thumnal}`
+                                  agent?.thumbnail
+                                    ? `${process.env.NEXT_PUBLIC_API_URL}/${agent.thumbnail}`
                                     : "/images/user/owner.jpg"
                                 }
                                 alt=" grid"

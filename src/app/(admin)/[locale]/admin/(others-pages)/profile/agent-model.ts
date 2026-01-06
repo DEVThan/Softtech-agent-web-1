@@ -60,5 +60,5 @@ export  default interface AgentModel {
   country: string; 
   redeem_cash: string; 
   subdistrict: string; 
-  thumnal: string;
+  thumbnail: string;
 }
