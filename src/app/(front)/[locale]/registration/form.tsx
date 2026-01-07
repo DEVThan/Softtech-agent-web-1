@@ -87,16 +87,51 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
+    const checkLocationPermission = async (): Promise<PermissionState> => {
+        if (!navigator.permissions) { return "prompt"; }
+        const result = await navigator.permissions.query({ name: "geolocation", });
+        return result.state; // "granted" | "prompt" | "denied"
+    };
+
+    const getCurrentLocation = (): Promise<GeolocationPosition> => {
+        return new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
+            });
+        });
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
+            const permission = await checkLocationPermission();
+            if (permission === "denied") {
+                // alert("Please enable location access to continue.");
+                setModal({ title:"Location Access Required", message: "",  details: [], remark: "Please allow location access so we can continue.", type: "warnning" });
+                return;
+            }
+
+            const position = await getCurrentLocation();
+            const { latitude, longitude } = position.coords;
+            const payload = {
+                ...formData,
+                lat: latitude.toString(),
+                lng: longitude.toString(),
+            };
+            setFormData(payload); // sync state
+            
+            // console.log("Submitting payload:", payload);
+            // return; // for testing purpose
+
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/app/create_agent`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "country": locale,
                 },
-                body: JSON.stringify(formData), // ส่งข้อมูล formData เป็น JSON
+                body: JSON.stringify(payload),
             });
 
             if (!response.ok) {
