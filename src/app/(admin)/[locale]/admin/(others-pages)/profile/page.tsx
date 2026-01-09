@@ -52,7 +52,7 @@ export default function Profile() {
         return;
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/get_profile`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/get_profile`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +101,7 @@ export default function Profile() {
     try {
       const formData = new FormData(e.currentTarget);
       const token = localStorage.getItem("token");
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/update_profile`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/update_profile`, {
           method: "POST",
           headers: {
               // "Content-Type": "application/json",
@@ -207,7 +207,7 @@ export default function Profile() {
                     height={80}
                     src={
                       agent?.thumbnail
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/${agent.thumbnail}`
+                        ? `${process.env.NEXT_PUBLIC_IMG_URL}/${agent.thumbnail}`
                         : "/images/user/owner.jpg"
                     }
                     alt="user"
@@ -360,7 +360,7 @@ export default function Profile() {
                                 // src={`${process.env.NEXT_PUBLIC_API_URL}/${agent.thumnal}`}
                                 src={
                                   agent?.thumbnail
-                                    ? `${process.env.NEXT_PUBLIC_API_URL}/${agent.thumbnail}`
+                                    ? `${process.env.NEXT_PUBLIC_IMG_URL}/${agent.thumbnail}`
                                     : "/images/user/owner.jpg"
                                 }
                                 alt=" grid"

@@ -48,7 +48,7 @@ export default function SigninPage() {
     // setError("");
 
     try {
-      const login = `${process.env.NEXT_PUBLIC_API_URL}/app/get_agent_idcard`;
+      const login = `${process.env.NEXT_PUBLIC_API_URL}/api/app/get_agent_idcard`;
       const res = await fetch(login, {
         method: "POST",
         headers: {
@@ -95,7 +95,7 @@ export default function SigninPage() {
         return; // หยุดการ submit
       }
       // const formData = new FormData(e.currentTarget);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/app/update_newpassword`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/app/update_newpassword`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",

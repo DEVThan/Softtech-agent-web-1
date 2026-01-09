@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+// import Image from "next/image";
 // import Link from "next/link";
 import React, {  useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -12,9 +12,8 @@ import { useUser } from "../../context/UserContext";
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   // const { setUser } = useUser();
-  const { agentName, agentSurName, agentEmailaddress, agentThumnal } = useUser();
-  console.log("UserDropdown agentName:", agentName);
-  console.log("UserDropdown agentName:", agentThumnal);
+  // const { agentName, agentSurName, agentEmailaddress, agentThumnal } = useUser();
+  const { agentName, agentSurName, agentEmailaddress } = useUser();
   
   // const [localStorageAgentName, setLocalStorageAgentName] = useState("");
   // const  [localStorageAgentsurname, setLocalStorageAgentsurname] = useState("");
@@ -43,25 +42,24 @@ export default function UserDropdown() {
   }
 
   const route = useParams<{ locale: string }>();
-  const baseAPIUrl = process.env.NEXT_PUBLIC_API_URL;
-  const avatarSrc =
-  typeof agentThumnal === "string" &&
-  agentThumnal.startsWith("uploads/") &&
-  baseAPIUrl
-    ? `${baseAPIUrl}/${agentThumnal}`
-    : "/images/user/owner.jpg";
+  // const baseAPIUrl = process.env.NEXT_PUBLIC_API_URL;
+  // const avatarSrc = typeof agentThumnal === "string" &&
+  // agentThumnal.startsWith("uploads/") &&
+  // baseAPIUrl
+  //   ? `${baseAPIUrl}/${agentThumnal}`
+  //   : "/images/user/owner.jpg";
       
   return (
     <div className="relative">
       <button onClick={toggleDropdown}  className="flex items-center text-gray-700 dark:text-gray-400 dropdown-toggle" >
-        <span className="relative mr-3 overflow-hidden rounded-full border-2 border-gray-900 dark:border-[#0874B6] h-11 w-11">
+        {/* <span className="relative mr-3 overflow-hidden rounded-full border-2 border-gray-900 dark:border-[#0874B6] h-11 w-11">
           <Image
             src={`${avatarSrc}`}
             alt="User"
             fill
             className="object-cover object-center"
           />
-        </span>
+        </span> */}
         <span className="block mr-1 font-medium text-theme-sm">{agentName}</span>
         <svg
           className={`stroke-gray-500 dark:stroke-gray-400 transition-transform duration-200 ${

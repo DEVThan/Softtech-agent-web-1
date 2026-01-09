@@ -613,7 +613,7 @@ scp -P 6789 softtech-agent-web.tar.gz root@203.78.103.157:/root/
 
 ```bash
 ssh root@203.78.103.157 -p 6789
-@pe$ajEr3d8#
+# input pass word
 ```
 
 แล้วรัน:
@@ -634,4 +634,139 @@ docker ps | grep softtechnw
 ```
 
 ---
+
+
+
+
+
+
+
+
+
+
+### ขั้นตอน การสร้าง ssl โดย zero ssl
+###  ---> SSH เข้า Server
+  ```bash
+  ssh root@203.78.103.157 -p 6789
+  # input pass word
+  ```
+
+### Remote Filezillar
+
+  ### ---> Create directory
+  ```bash
+    # ถ้าไม่มีให้สร้าง zerossl/softtech-agent-web/.well-known/pki-validation
+    /var/www/zerossl/softtech-agent-web/.well-known/pki-validation
+  ```
+
+  ### ---> Upload file Form ZeroSSL into /pki-validation
+    ```bash 
+    # upload file into zerossl/softtech-agent-web/.well-known/pki-validation
+    /var/www/zerossl/softtech-agent-web/.well-known/pki-validation
+    ```
+
+  ### ---> Config file
+    ```bash 
+      #   /etc/nginx/conf.d/agent.softtechnw.com.conf
+      server {
+          listen 80;
+        server_name agent.softtechnw.com www.agent.softtechnw.com;
+
+        # 🔑 ZeroSSL validation
+        location ^~ /.well-known/pki-validation/ {
+            alias /var/www/zerossl/softtech-agent-web/.well-known/pki-validation/;
+            allow all;
+            default_type text/plain;
+            try_files $uri =404;
+        }
+
+        # redirect all
+        location / {
+            return 301 https://agent.softtechnw.com$request_uri;
+        }
+      }
+   ```
+    
+  ### ---> Create directory
+  ```bash
+    # ถ้าไม่มีให้สร้าง ssl/agent.softtechnw.com
+    /etc/nginx/ssl/agent.softtechnw.com
+  ```
+
+  ### ---> Create fullchain.pem file
+    ```bash
+    ssh root@203.78.103.157 -p 6789
+    # input pass word
+
+    cd /etc/nginx/ssl/agent.softtechnw.com
+
+    sudo cat certificate.crt ca_bundle.crt > fullchain.pem
+
+    ls -la /// ตอนนี้ต้องเห็น:  fullchain.pem
+    ```
+
+  ### ---> Config file
+    ```bash 
+      #  เพิ่ม Config  ใน file -->  /etc/nginx/conf.d/agent.softtechnw.com.conf
+      server {
+          listen 443 ssl http2;
+        # server_name agent.softtechnw.com www.agent.softtechnw.com;
+        server_name agent.softtechnw.com;
+
+        ssl_certificate     /etc/nginx/ssl/agent.softtechnw.com/fullchain.pem;
+        ssl_certificate_key /etc/nginx/ssl/agent.softtechnw.com/private.key;
+
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_prefer_server_ciphers on;
+
+        # ===== Reverse Proxy API =====
+        location /api/ {
+            proxy_pass http://api.ip.xxx.xx:port/api/;
+
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto https;
+
+            proxy_connect_timeout 60s;
+            proxy_read_timeout 60s;
+        }
+
+        location / {
+            proxy_pass http://127.0.0.1:3000;
+            proxy_http_version 1.1;
+
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto https;
+        }
+      }
+
+      server {
+          listen 443 ssl;
+          server_name www.agent.softtechnw.com;
+
+          ssl_certificate     /etc/nginx/ssl/agent.softtechnw.com/fullchain.pem;
+          ssl_certificate_key /etc/nginx/ssl/agent.softtechnw.com/private.key;
+
+          return 301 https://agent.softtechnw.com$request_uri;
+      }
+    ```
+
+
+  ### ---> reload test
+    ```bash
+    sudo nginx -t
+    # return.  "syntax is ok,  test is successful"
+    ```
+  ### ---> Reload Nginx
+    ```bash
+    sudo systemctl reload nginx
+    # test open in browser  https://official.softtechnw.com 
+    ```
+
+
+
 

@@ -30,7 +30,7 @@ export default  function UserMetaCard({ agent }: UserMetaCardProps) {
       const formData = new FormData(e.currentTarget);
       formData.forEach((value, key) => { data[key] = value; });
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/update_profile`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/update_profile`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",

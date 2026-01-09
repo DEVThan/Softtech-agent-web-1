@@ -125,7 +125,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
             // console.log("Submitting payload:", payload);
             // return; // for testing purpose
 
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/app/create_agent`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/app/create_agent`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

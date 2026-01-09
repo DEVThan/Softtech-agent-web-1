@@ -88,7 +88,7 @@ export default function PerfomancePage() {
     async (token: string, agentcode: string) => {
       try {
         if (!token || !agentcode) { console.warn("No token or agentcode found"); return; }else{}
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/all_performance`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/all_performance`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -182,13 +182,39 @@ export default function PerfomancePage() {
   }
 
 
+  const checkLocationPermission = async (): Promise<PermissionState> => {
+      if (!navigator.permissions) { return "prompt"; }
+      const result = await navigator.permissions.query({ name: "geolocation", });
+      return result.state; // "granted" | "prompt" | "denied"
+  };
+
+  const getCurrentLocation = (): Promise<GeolocationPosition> => {
+      return new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+          });
+      });
+  };
+
   // Modal add form
   const handleAddSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
       const formData = new FormData(e.currentTarget);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/create_performance`, {
+      const permission = await checkLocationPermission();
+      if (permission === "denied") {
+          alert("Please allow location access so we can continue.");
+          // setModal({ title:"Location Access Required", message: "",  details: [], remark: "Please allow location access so we can continue.", type: "warnning" });
+          return;
+      }
+      const position = await getCurrentLocation();
+      const { latitude, longitude } = position.coords;
+      formData.set("lat", latitude.toString());
+      formData.set("lng", longitude.toString());
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/create_performance`, {
           method: "POST",
           headers: {
               // "Content-Type": "application/json",
@@ -228,7 +254,17 @@ export default function PerfomancePage() {
     setLoading(true);
     try {
       const formData = new FormData(e.currentTarget);
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/update_performance`, {
+      const permission = await checkLocationPermission();
+      if (permission === "denied") {
+          alert("Please allow location access so we can continue.");
+          // setModal({ title:"Location Access Required", message: "",  details: [], remark: "Please allow location access so we can continue.", type: "warnning" });
+          return;
+      }
+      const position = await getCurrentLocation();
+      const { latitude, longitude } = position.coords;
+      formData.set("lat", latitude.toString());
+      formData.set("lng", longitude.toString());
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/update_performance`, {
           method: "POST",
           headers: {
               // "Content-Type": "application/json",
@@ -266,7 +302,7 @@ export default function PerfomancePage() {
   const handleDeleteFile = async (performancecode:string,  fileid: number, path:string) => { 
     const isConfirmed = window.confirm("Are you sure you want to delete this file?");
     if (isConfirmed) {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/delete_performance_file`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/delete_performance_file`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
@@ -391,7 +427,7 @@ export default function PerfomancePage() {
                                       <Image
                                         width={40}
                                         height={40}
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/${item.files[0].path}`}
+                                        src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.files[0].path}`}
                                         alt={item.name}
                                         className="object-cover object-center w-full h-full"
                                       />
@@ -412,7 +448,7 @@ export default function PerfomancePage() {
                                     <button onClick={() => fileOnViewModal(item.id, item.path)} className="flex -space-x-2 items-center" >
                                       <div className="w-6 h-6 items-center  justify-center">
                                         <Image width={40} height={40}
-                                          src={`${process.env.NEXT_PUBLIC_API_URL}/${item.path}`}
+                                          src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.path}`}
                                             alt=""
                                           className="object-cover object-center w-full h-full"
                                         />
@@ -603,7 +639,7 @@ export default function PerfomancePage() {
                         {EditformData?.files?.map((item) => (
                           <div key={item.id} className="relative inline-block group ">
                             <Image
-                              src={`${process.env.NEXT_PUBLIC_API_URL}/${item.path}`}
+                              src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.path}`}
                               alt=" grid"
                               className=" w-full border-2 border-gray-900 dark:border-[#0874B6] rounded-xl "
                               width={338}
@@ -672,7 +708,7 @@ export default function PerfomancePage() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 xl:grid-cols-1 mt-3">
               <div className="relative inline-block group">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${viewFilePath}`}
+                  src={`${process.env.NEXT_PUBLIC_IMG_URL}/${viewFilePath}`}
                   alt=" grid"
                   className=" w-full border border-gray-200 rounded-xl dark:border-gray-800"
                   width={338}
@@ -700,7 +736,7 @@ export default function PerfomancePage() {
 
                 <button
                   onClick={ async () => {
-                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/admin/delete_performance`, {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/delete_performance`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

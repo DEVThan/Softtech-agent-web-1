@@ -28,7 +28,7 @@ export default function SigninPage() {
     // setError("");
 
     try {
-      const login = `${process.env.NEXT_PUBLIC_API_URL}/admin/login`;
+      const login = `${process.env.NEXT_PUBLIC_API_URL}/api/admin/login`;
       const res = await fetch(login, {
         method: "POST",
         headers: { 
