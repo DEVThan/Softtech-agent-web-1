@@ -334,6 +334,13 @@ export default function PerfomancePage() {
   // Pagination
   const handlePageChange = async (page: number) => { setCurrentPage(page); }; 
 
+
+const getImageSrc = (path?: string) => {
+  if (!process.env.NEXT_PUBLIC_IMG_URL || !path) return "/images/no-image.png";
+
+  return new URL(path, process.env.NEXT_PUBLIC_IMG_URL).toString();
+};
+
   return (
     <div>
       {/* <PageBreadcrumb pageTitle="Basic Table" /> */}
@@ -427,7 +434,8 @@ export default function PerfomancePage() {
                                       <Image
                                         width={40}
                                         height={40}
-                                        src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.files[0].path}`}
+                                        // src={`${process.env.NEXT_PUBLIC_IMG_URL}${item.files[0].path}`|| ""}
+                                        src={getImageSrc(item.files[0].path)}
                                         alt={item.name}
                                         className="object-cover object-center w-full h-full"
                                       />
@@ -448,7 +456,8 @@ export default function PerfomancePage() {
                                     <button onClick={() => fileOnViewModal(item.id, item.path)} className="flex -space-x-2 items-center" >
                                       <div className="w-6 h-6 items-center  justify-center">
                                         <Image width={40} height={40}
-                                          src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.path}`}
+                                          // src={`${process.env.NEXT_PUBLIC_IMG_URL}${item.path}`}
+                                          src={getImageSrc(item.path)}
                                             alt=""
                                           className="object-cover object-center w-full h-full"
                                         />
@@ -639,7 +648,7 @@ export default function PerfomancePage() {
                         {EditformData?.files?.map((item) => (
                           <div key={item.id} className="relative inline-block group ">
                             <Image
-                              src={`${process.env.NEXT_PUBLIC_IMG_URL}/${item.path}`}
+                              src={`${process.env.NEXT_PUBLIC_IMG_URL}${item.path}`}
                               alt=" grid"
                               className=" w-full border-2 border-gray-900 dark:border-[#0874B6] rounded-xl "
                               width={338}
@@ -708,7 +717,7 @@ export default function PerfomancePage() {
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-1 xl:grid-cols-1 mt-3">
               <div className="relative inline-block group">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_IMG_URL}/${viewFilePath}`}
+                  src={`${process.env.NEXT_PUBLIC_IMG_URL}${viewFilePath}`}
                   alt=" grid"
                   className=" w-full border border-gray-200 rounded-xl dark:border-gray-800"
                   width={338}

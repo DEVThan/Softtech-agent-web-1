@@ -207,7 +207,7 @@ export default function Profile() {
                     height={80}
                     src={
                       agent?.thumbnail
-                        ? `${process.env.NEXT_PUBLIC_IMG_URL}/${agent.thumbnail}`
+                        ? `${process.env.NEXT_PUBLIC_IMG_URL}${agent.thumbnail}`
                         : "/images/user/owner.jpg"
                     }
                     alt="user"
@@ -360,7 +360,7 @@ export default function Profile() {
                                 // src={`${process.env.NEXT_PUBLIC_API_URL}/${agent.thumnal}`}
                                 src={
                                   agent?.thumbnail
-                                    ? `${process.env.NEXT_PUBLIC_IMG_URL}/${agent.thumbnail}`
+                                    ? `${process.env.NEXT_PUBLIC_IMG_URL}${agent.thumbnail}`
                                     : "/images/user/owner.jpg"
                                 }
                                 alt=" grid"
