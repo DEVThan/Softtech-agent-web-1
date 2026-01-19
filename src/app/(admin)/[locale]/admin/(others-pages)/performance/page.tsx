@@ -7,7 +7,8 @@
 import React from "react";
 import { FiPlus, FiEdit, FiTrash2 } from "react-icons/fi";
 import { useState, useEffect, useCallback } from "react";
-import { Eye, Trash2 } from "lucide-react";
+// import { Eye, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 // import { useRouter } from "next/router";
 // import { useRouter } from "next/navigation";
 import { useRouter, usePathname } from "next/navigation";
@@ -650,11 +651,11 @@ export default function PerfomancePage() {
                             <div
                               className=" absolute inset-0 flex items-center justify-center gap-3 rounded-xl transition-opacity duration-300  opacity-100  " >
                               {/* ปุ่ม View */}
-                              <button type="button"
+                              {/* <button type="button"
                                 onClick={() => fileOnViewModal(item.id, item.path)}
                                 className="flex items-center gap-1 px-2 py-2 text-sm font-medium text-white bg-black/50  rounded-full hover:bg-blue-700">
                                 <Eye size={18} />
-                              </button>
+                              </button> */}
 
                               {/* ปุ่ม Delete */}
                               <button type="button"

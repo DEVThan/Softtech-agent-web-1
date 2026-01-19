@@ -17,5 +17,14 @@
         "content": ""
     }],
     "fax":"Registration"
+  },
+  "social":{
+    "label": "Social",
+    "desc":"",
+    "content": [{
+      "label": "Facebook",
+      "content": "",
+      "link": "#"
+    }]
   }
 }

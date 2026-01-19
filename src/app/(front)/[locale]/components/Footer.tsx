@@ -9,6 +9,13 @@ interface NavbarProps {
       tel: {
         label: string; content: string;
       }[]
+    },
+    social: { 
+      label: string; 
+      desc: string;
+      content: {
+          label: string; content: string; link: string;
+      }[]
     }
   };
 }
@@ -23,8 +30,13 @@ export default function Footer({ footer }: NavbarProps) {
             <div  className="grid px-6 pt-0 w-[300px] sm:w-[400px] ">
                 <span className="text-[10px] sm:text-[15px]  font-bold">{footer.conpany.conpany_name}</span>
                 <label className="text-[7px] sm:text-[10px] ">{footer.conpany.address}</label>
-                <span className="text-[10px] sm:text-[15px]  font-bold mt-2">{footer.contact.label}</span>
+                {/* <span className="text-[10px] sm:text-[15px]  font-bold mt-2">{footer.contact.label}</span>
+                <label className="text-[7px] sm:text-[10px] "> {footer.contact.tel[0].label}: {footer.contact.tel[0].content}</label> */}
+            </div>
+            <div  className="grid px-6 pt-0 w-[300px] sm:w-[400px] ">
+                <span className="text-[10px] sm:text-[15px]  font-bold">{footer.contact.label}</span>
                 <label className="text-[7px] sm:text-[10px] "> {footer.contact.tel[0].label}: {footer.contact.tel[0].content}</label>
+                <label className="text-[7px] sm:text-[10px] "> {footer.social.label}: {footer.social.content[0].label}</label>
             </div>
         </div>
     </footer>
