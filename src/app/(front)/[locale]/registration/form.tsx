@@ -1,6 +1,7 @@
 "use client";
 import { useState} from "react";
 import Modal from "../components/Modal"; // import component modal
+import  { getLocaleFromSubdomain }  from "@/lib/function";
 
 interface FormLabels {
   idcard: string;
@@ -129,7 +130,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "country": locale,
+                    "country": await getLocaleFromSubdomain(),
                 },
                 body: JSON.stringify(payload),
             });

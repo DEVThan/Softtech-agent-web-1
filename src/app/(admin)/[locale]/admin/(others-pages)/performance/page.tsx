@@ -39,6 +39,7 @@ import Pagination  from "./Pagination";
 // import Badge from "../ui/badge/Badge";
 // import Badge from "../../../components/ui/badge/Badge";
 import Image from "next/image";
+import  { getLocaleFromSubdomain }  from "@/lib/function";
 
 
 // export const metadata: Metadata = {
@@ -93,7 +94,7 @@ export default function PerfomancePage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "country" : locale,
+            "country" : await getLocaleFromSubdomain(),
             "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify({ 
@@ -219,7 +220,7 @@ export default function PerfomancePage() {
           method: "POST",
           headers: {
               // "Content-Type": "application/json",
-               "country" : locale,
+               "country" : await getLocaleFromSubdomain(),
               "Authorization": `Bearer ${token}`,
           },
           body: formData,
@@ -269,7 +270,7 @@ export default function PerfomancePage() {
           method: "POST",
           headers: {
               // "Content-Type": "application/json",
-              "country" : locale,
+              "country" : await getLocaleFromSubdomain(),
               "Authorization": `Bearer ${token}`,
           },
           body: formData,
@@ -307,7 +308,7 @@ export default function PerfomancePage() {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
-              "country" : locale,
+              "country" : await getLocaleFromSubdomain(),
               "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify({ performancecode:performancecode, fileid: fileid, filepath: path }),
@@ -741,7 +742,7 @@ export default function PerfomancePage() {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
-                            "country" : locale,
+                            "country" : await getLocaleFromSubdomain(),
                             "Authorization": `Bearer ${token}`,
                         },
                         body: JSON.stringify({ performancecode:selectedItem.performancecode, agentcode:selectedItem.agentcode}),

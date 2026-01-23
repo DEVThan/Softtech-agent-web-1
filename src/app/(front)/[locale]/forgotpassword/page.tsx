@@ -11,6 +11,7 @@ import Alert from "../../../(admin)/[locale]/components/ui/alert/Alert";
 import { motion, AnimatePresence } from "framer-motion";
 // import { useUser } from "../../../(admin)/[locale]/context/UserContext";
 // import { useParams } from "next/navigation";
+import  { getLocaleFromSubdomain }  from "@/lib/function";
 
 export default function SigninPage() {
     
@@ -53,7 +54,7 @@ export default function SigninPage() {
         method: "POST",
         headers: {
               "Content-Type": "application/json",
-              "country" : locale,
+              "country" : await getLocaleFromSubdomain(),
           },
         body: JSON.stringify({ idcard }),
       });
@@ -99,7 +100,7 @@ export default function SigninPage() {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
-              "country" : locale,
+              "country" : await getLocaleFromSubdomain(),
           },
           body: JSON.stringify({idcard, password}),
           //  body: formData,

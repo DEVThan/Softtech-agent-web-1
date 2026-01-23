@@ -9,6 +9,7 @@ import Label from "../../../components/form/Label";
 
 import Image from "next/image";
 import AgentModel  from "./agent-model";
+import  { getLocaleFromSubdomain }  from "@/lib/function";
 
 interface UserMetaCardProps {
   agent: AgentModel;
@@ -34,6 +35,7 @@ export default  function UserMetaCard({ agent }: UserMetaCardProps) {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
+              "country" : await getLocaleFromSubdomain(),
               "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify(data),

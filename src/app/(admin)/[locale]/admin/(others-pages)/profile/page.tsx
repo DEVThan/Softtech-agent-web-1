@@ -19,6 +19,7 @@ import Button from "../../../components/ui/button/Button";
 import Label from "../../../components/form/Label";
 
 import Image from "next/image";
+import  { getLocaleFromSubdomain }  from "@/lib/function";
 
 
 // export const metadata: Metadata = {
@@ -56,7 +57,7 @@ export default function Profile() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "country" : locale,
+          "country" : await getLocaleFromSubdomain(),
           "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({ agentcode }),
@@ -105,7 +106,7 @@ export default function Profile() {
           method: "POST",
           headers: {
               // "Content-Type": "application/json",
-              "country" : locale,
+              "country" : await getLocaleFromSubdomain(),
               "Authorization": `Bearer ${token}`,
           },
           // body: JSON.stringify(data),

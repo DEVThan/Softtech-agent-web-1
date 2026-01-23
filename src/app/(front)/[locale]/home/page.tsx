@@ -1,5 +1,5 @@
 import { loadLocale } from '@/lib/loadLocale';
-import Carousel from "../components/Carousel";
+// import Carousel from "../components/Carousel";
 import Image from 'next/image';
 
 interface HomePageProps {
@@ -38,7 +38,16 @@ export default async function HomePage({ params }: HomePageProps) {
     <div className="content">
       {/* <div className="grid grid-cols-1 mt-0 sm:mt-4 md:mt-4 panel mb-4"> */}
         {/* <div>01</div> */}
-        <Carousel common={common} locale={locale} />
+        {/* <Carousel common={common} locale={locale} /> */}
+        <div className="section mt-0 sm:mt-2 md:mt-2">
+          <div className="flex justify-center items-center w-full  pt-4">
+            <div className="w-full flex justify-center items-center">
+              <Image src="/front_images/banner/Banner_M1_website_2026.jpg" alt="Logo"
+                width={100} height={200}
+                className="rounded-[10px] object-contain w-full h-full" />
+            </div>
+          </div>
+        </div>
       {/* </div> */}
 
       <div className="section mt-0 sm:mt-2 md:mt-8">

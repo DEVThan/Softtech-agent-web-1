@@ -8,6 +8,7 @@ import {
 import Modal from "../components/Modal"; // import component modal
 import { useUser } from "../../../(admin)/[locale]/context/UserContext";
 // import { useParams } from "next/navigation";
+import  { getLocaleFromSubdomain }  from "@/lib/function";
 
 export default function SigninPage() {
     
@@ -33,7 +34,7 @@ export default function SigninPage() {
         method: "POST",
         headers: { 
           "Content-Type": "application/json", 
-          "country": route.locale
+          "country": await getLocaleFromSubdomain(),
         },
         body: JSON.stringify({ username, password }),
       });
