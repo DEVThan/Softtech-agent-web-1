@@ -153,17 +153,23 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
             setModal({ title:"Failed to registation.", message: "",  details: [], remark: "Please contact the staff/officer.", type: "error" });
         }
     };
-
+    // const json_conntent = {
+    //     "submitbutton":{
+    //       "en": "Register",
+    //       "th": "ลงทะเบียน",
+    //       "mm": "မှတ်ပုံတင်ပါ"
+    //     },
+    // };
     return (
         <>
-            <div className="title grid  grid-cols-1 text-center text-[#0874B6] dark:text-[#474747] mb-3">
-                <h1>{regisjson.title}</h1>
+            <div className="title grid grid-cols-1 text-center text-[#0874B6] dark:text-[#474747] mb-3">
+                <label className=" text-[21px]">{regisjson.title}</label>
             </div>
             
             <form onSubmit={handleSubmit} className="mt-6 max-w registration-form" >
                 <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mb-3">
                     <div className="flex flex-col">
-                        <label htmlFor="idcard">{personal.idcard} <span className="text-[red]">*</span></label>
+                        <label htmlFor="idcard" className="text-[13px] md:text-[13px] text-gray-500">{personal.idcard} <span className="text-[red]">*</span></label>
                         <input type="text" id="idcard" name="idcard" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -176,7 +182,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                 
                 <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4 mb-3">
                     <div className="flex flex-col">
-                        <label htmlFor="firstName">{personal.firstname} <span className="text-[red]">*</span></label>
+                        <label htmlFor="firstName" className="text-[13px] md:text-[13px] text-gray-500">{personal.firstname} <span className="text-[red]">*</span></label>
                         <input type="text" id="firstName" name="firstName" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -187,7 +193,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                     </div>
                     
                     <div className="flex flex-col">
-                        <label htmlFor="surname">{personal.surname}<span className="text-[red]">*</span></label>
+                        <label htmlFor="surname" className="text-[13px] md:text-[13px] text-gray-500">{personal.surname}<span className="text-[red]">*</span></label>
                         <input type="text" id="surname" name="surname" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -199,7 +205,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                 </div>
                 <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4  mb-3">
                     <div className="flex flex-col">
-                        <label htmlFor="phonenumber">{personal.phonenumber} <span className="text-[red]">*</span></label>
+                        <label htmlFor="phonenumber" className="text-[13px] md:text-[13px] text-gray-500">{personal.phonenumber} <span className="text-[red]">*</span></label>
                         <input type="text" id="phonenumber" name="phonenumber" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -210,7 +216,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                     </div>
                     
                     <div className="flex flex-col">
-                        <label htmlFor="email">{personal.email} </label>
+                        <label htmlFor="email" className="text-[13px] md:text-[13px] text-gray-500">{personal.email} </label>
                         <input type="email" id="email" name="email" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -228,7 +234,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
 
                 <div className="grid  grid-cols-1 sm:grid-cols-1 md:grid-cols-1 gap-1  mb-3">
                     <div className="flex flex-col">
-                        <label htmlFor="address">{address.address} <span className="text-[red]">*</span></label>
+                        <label htmlFor="address" className="text-[13px] md:text-[13px] text-gray-500">{address.address} <span className="text-[red]">*</span></label>
                         {/* <input type="text" id="work-address" name="address" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -252,7 +258,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                 </div>
                 <div className="grid  grid-cols-2 gap-4  mb-3">
                     <div className="flex flex-col">
-                        <label htmlFor="street">{address.street}</label>
+                        <label htmlFor="street" className="text-[13px] md:text-[13px] text-gray-500">{address.street}</label>
                         <input type="text" id="street" name="street" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -261,7 +267,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                         />
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="country">{address.country}</label>
+                        <label htmlFor="country" className="text-[13px] md:text-[13px] text-gray-500">{address.country}</label>
                         <input type="text" id="country" name="country" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -272,7 +278,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                 </div>
                 <div className="grid  grid-cols-2 gap-4  mb-3">
                     <div className="flex flex-col">
-                        <label htmlFor="subdistrict">{address.subdistrict}</label>
+                        <label htmlFor="subdistrict" className="text-[13px] md:text-[13px] text-gray-500">{address.subdistrict}</label>
                         <input type="text" id="subdistrict" name="subdistrict" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -281,7 +287,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                         />
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="district">{address.district} <span className="text-[red]">*</span></label>
+                        <label htmlFor="district" className="text-[13px] md:text-[13px] text-gray-500">{address.district} <span className="text-[red]">*</span></label>
                         <input type="text" id="district" name="district" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -293,7 +299,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                 </div>
                 <div className="grid  grid-cols-2 gap-4  mb-3">
                     <div className="flex flex-col">
-                        <label htmlFor="province">{address.province}<span className="text-[red]">*</span></label>
+                        <label htmlFor="province" className="text-[13px] md:text-[13px] text-gray-500">{address.province}<span className="text-[red]">*</span></label>
                         <input type="text" id="province" name="province" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -303,7 +309,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                         />
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="postalcode">{address.postalcode}<span className="text-[red]">*</span></label>
+                        <label htmlFor="postalcode" className="text-[13px] md:text-[13px] text-gray-500">{address.postalcode}<span className="text-[red]">*</span></label>
                         <input type="text" id="postalcode" name="postalcode" className="input-elm border rounded px-4 py-1 mt-1
                         focus-visible:outline-none
                         focus-visible:border-[#871212]" 
@@ -317,6 +323,7 @@ export default function RegistrationForm({ regisjson, common, locale }: Registra
                 <div className="flex justify-center">
                     <button type="submit" className=" btn-primary bg-[#0874B6] dark:bg-gray-800 w-60 text-white px-6 py-2 rounded-3xl mt-2">
                     {common.button.register}
+                    {/* {json_conntent.submitbutton[locale]} */}
                     </button>
                     {/* <button type="submit"
                     className="mt-4 bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600"

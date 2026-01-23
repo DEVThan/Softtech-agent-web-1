@@ -1,40 +1,40 @@
 {
-  "title": "Fill in the information to register",
-  "description": "Fill in your information here.",
-  "form":{
-    "personal":{
-      "label":"",
+  "title": "စာရင်းသွင်းရန် အချက်အလက်များကို ဖြည့်စွက်ပါ",
+  "description": "သင့်အချက်အလက်များကို ဤနေရာတွင် ဖြည့်စွက်ပါ။",
+  "form": {
+    "personal": {
+      "label": "",
       "desc": "",
-      "idcard": "ID Card Number/Passport",
-      "firstname": "First Name",
-      "surname": "Sur Name",
-      "phonenumber": "Phone Number",
-      "email": "Email",
-      "dateofbirth": "Date Of Birth",
-      "fax": "Fax"
+      "idcard": "မှတ်ပုံတင်ကတ် / နိုင်ငံကူးလက်မှတ် နံပါတ်",
+      "firstname": "အမည်",
+      "surname": "မျိုးရိုးအမည်",
+      "phonenumber": "ဖုန်းနံပါတ်",
+      "email": "အီးမေးလ်",
+      "dateofbirth": "မွေးနေ့",
+      "fax": "ဖက်စ်"
     },
-    "address":{
-      "label":"Address",
+    "address": {
+      "label": "လိပ်စာ",
       "desc": "",
-      "address": "Address",
-      "street": "Street",
-      "subdistrict": "Sub District",
-      "district": "District",
-      "province": "Province",
-      "country": "Country",
-      "postalcode":"Postal Code"
+      "address": "လိပ်စာ",
+      "street": "လမ်းအမည်",
+      "subdistrict": "ရပ်ကွက်",
+      "district": "ခရိုင်",
+      "province": "တိုင်းဒေသကြီး / ပြည်နယ်",
+      "country": "နိုင်ငံ",
+      "postalcode": "စာတိုက်ကုဒ်"
     },
-    "work_location":{
-      "label":"Work Location",
+    "work_location": {
+      "label": "အလုပ်လုပ်ရာနေရာ",
       "desc": "",
-      "address": "Address",
-      "building":"Building/Village",
-      "street": "Street",
-      "subdistrict": "Sub District",
-      "district": "District",
-      "province": "Province",
-      "country": "Country",
-      "postalcode":"Postal Code"
+      "address": "လိပ်စာ",
+      "building": "အဆောက်အဦး / ရွာ",
+      "street": "လမ်းအမည်",
+      "subdistrict": "ရပ်ကွက်",
+      "district": "ခရိုင်",
+      "province": "တိုင်းဒေသကြီး / ပြည်နယ်",
+      "country": "နိုင်ငံ",
+      "postalcode": "စာတိုက်ကုဒ်"
     }
   }
 }

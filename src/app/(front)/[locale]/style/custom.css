@@ -123,23 +123,29 @@ footer label, footer span{
         border-bottom-left-radius: 0px;
         border-bottom-right-radius: 0px;
     }
-    .front-header .logos {width: auto; height: 35px;}
+    .front-header .logos {width: auto; height: 65px;}
 
     .section {padding: 17px;}
     /* Panel */
     .panel {  border-radius: 10px; }
     .panel .our-product {  width: 50%; height: 100%; }
-    .panel h1 { font-size: 1rem; margin: 1rem !important;}
-    .panel span, .panel p { font-size: 11px;}
-    .panel button, .panel a { font-size: 12px !important;}
-    .panel form.registration-form label { font-size: 0.6rem !important; }
+    .panel h1 { font-size: 2rem; margin: 1rem !important;}
+    /* .panel span, .panel p { font-size: 17px;} */
+    /* .panel button, .panel a { font-size: 12px !important;} */
+    /* .panel form.registration-form label { font-size: 0.6rem !important; } */
+
+    /* Product Card */
+    /* .product-card {  border-radius: 10px; } */
+    .product-card .product-card-header {height: 210px; }  
+    .product-card .product-card-content { height: 150px; }  
+    /* .product-card .product-card-footer { }   */
 
     /* Footer */
     footer {
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
     }
-    footer .logos {width: auto; height: 35px;}
+    footer .logos {width: auto; height: 65px;}
 }
 
 /* >= 640px */
@@ -151,7 +157,7 @@ footer label, footer span{
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
-    .front-header .logos {width: auto; height: 35px;}
+    .front-header .logos {width: auto; height: 55px;}
     .front-header nav {font-size: .7rem; }
 
     /* .section {padding: 5px;} */
@@ -161,15 +167,21 @@ footer label, footer span{
     .panel h1 { font-size: 1rem; margin: 1rem !important;}
     .panel span, .panel p { font-size: 11px;}
     .panel button, .panel a { font-size: 12px !important;}
-    .panel form.registration-form label { font-size: 0.6rem !important; }
+    /* .panel form.registration-form label { font-size: 0.6rem !important; } */
     
+    /* Product Card */
+    /* .product-card {  border-radius: 10px; } */
+    .product-card .product-card-header {height: 210px; }  
+    .product-card .product-card-content { height: 150px; }  
+    /* .product-card .product-card-footer { }   */
+
     /* Footer */
     footer {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         margin-top: 1rem;
     }
-    footer .logos {width: auto; height: 35px;}
+    footer .logos {width: auto; height: 55px;}
 }
 
 /* >= 768px */
@@ -181,7 +193,7 @@ footer label, footer span{
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
-    .front-header .logos {width: auto; height: 35px;}
+    .front-header .logos {width: auto; height: 55px;}
     .front-header nav {font-size: .8rem; }
 
     /* Panel */
@@ -190,7 +202,13 @@ footer label, footer span{
     .panel h1 { font-size: 1rem; margin: 1rem !important;}
     .panel span, .panel p { font-size: 13px;}
     .panel button, .panel a { font-size: 13px !important;}
-    .panel form.registration-form label { font-size: 0.7rem !important; }
+    /* .panel form.registration-form label { font-size: 0.7rem !important; } */
+
+    /* Product Card */
+    /* .product-card {  border-radius: 10px; } */
+    .product-card .product-card-header {height: 210px; }  
+    .product-card .product-card-content { height: 150px; }  
+    /* .product-card .product-card-footer { }   */
 
     /* Footer */
     footer {
@@ -198,7 +216,7 @@ footer label, footer span{
         border-top-right-radius: 10px;
         margin-top: 1rem;
     }
-    footer .logos {width: auto; height: 35px;}
+    footer .logos {width: auto; height: 55px;}
 }
 
 /* >= 1024px */
@@ -210,7 +228,7 @@ footer label, footer span{
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
-    .front-header .logos {width: auto; height: 35px;}
+    .front-header .logos {width: auto; height: 55px;}
     .front-header nav {font-size: .8rem; }
 
     /* Panel */
@@ -219,7 +237,14 @@ footer label, footer span{
     .panel h1 { font-size: 1.5rem; margin: 1.5rem !important;}
     .panel span, .panel p { font-size: 13px;}
     .panel button, .panel a { font-size: 13px !important;}
-    .panel form.registration-form label { font-size: 0.7rem !important; }
+    /* .panel form.registration-form label { font-size: 0.7rem !important; } */
+    
+
+    /* Product Card */
+    /* .product-card {  border-radius: 10px; } */
+    .product-card .product-card-header {height: 210px; }  
+    .product-card .product-card-content { height: 150px; }  
+    /* .product-card .product-card-footer { }   */
     
     /* Footer */
     footer {
@@ -227,5 +252,5 @@ footer label, footer span{
         border-top-right-radius: 10px;
         margin-top: 1rem;
     }
-    footer .logos {width: auto; height: 35px;}
+    footer .logos {width: auto; height: 55px;}
 }

@@ -1,14 +1,14 @@
 {
   "button": {
-    "submit":"submit",
-    "cancel":"Cancel",
-    "confirm":"Confirm",
-    "close":"Close",
-    "open":"Open",
-    "add":"Add",
-    "edit":"Edit",
-    "readmore":"ဆက်လက်ဖတ်ရှုရန်",
-    "register":"Register"
+    "submit": "တင်သွင်းရန်",
+    "cancel": "ပယ်ဖျက်ရန်",
+    "confirm": "အတည်ပြုရန်",
+    "close": "ပိတ်ရန်",
+    "open": "ဖွင့်ရန်",
+    "add": "ထည့်ရန်",
+    "edit": "ပြင်ဆင်ရန်",
+    "readmore": "ဆက်လက်ဖတ်ရှုရန်",
+    "register": "စာရင်းသွင်းရန်"
   },
   "modal": ""
 }

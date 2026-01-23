@@ -1,30 +1,36 @@
 {
   "conpany": {
-    "conpany_name":"Softtech Company Limited MM",
-    "label":"",
-    "desc":"",
-    "address":"No. 735/4 Building D, Room no. D2 05 2nd floor, Srinakarindra road, Suanluang, Bangkok, Thailand 10250"
+    "conpany_name": "ဆော့ဖ်တက်ခ် ကုမ္ပဏီ လီမိတက် (မြန်မာ)",
+    "label": "",
+    "desc": "",
+    "address": "အမှတ် ၇၃၅/၄၊ အဆောက်အဦး D၊ အခန်းအမှတ် D2-05၊ ဒုတိယထပ်၊ သီရိနကရင်ဒါလမ်း၊ ဆွန်းလွမ်းခရိုင်၊ ဘန်ကောက်မြို့၊ ထိုင်းနိုင်ငံ ၁၀၂၅၀"
   },
-  "contact":{
-    "label":"Contacts",
-    "desc":"",
-    "tel":[{
-        "label": "Phone",
+  "contact": {
+    "label": "ဆက်သွယ်ရန်",
+    "desc": "",
+    "tel": [
+      {
+        "label": "ဖုန်း",
         "content": "(+66) 093-939-2636"
-    }],
-    "email":[{
-        "label": "email",
+      }
+    ],
+    "email": [
+      {
+        "label": "အီးမေးလ်",
         "content": ""
-    }],
-    "fax":"Registration"
+      }
+    ],
+    "fax": "မှတ်ပုံတင်ခြင်း"
   },
-  "social":{
-    "label": "Social",
-    "desc":"",
-    "content": [{
-      "label": "Facebook",
-      "content": "",
-      "link": "#"
-    }]
+  "social": {
+    "label": "လူမှုကွန်ရက်",
+    "desc": "",
+    "content": [
+      {
+        "label": "ဖေ့စ်ဘွတ်",
+        "content": "",
+        "link": "#"
+      }
+    ]
   }
 }

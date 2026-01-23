@@ -1,28 +1,28 @@
 {
   "conpany": {
-    "conpany_name":"Softtech Company Limited Thai",
+    "conpany_name":"บริษัท ซอฟเทค เน็ตเวิร์ค จำกัด",
     "label":"",
     "desc":"",
-    "address":"No. 735/4 Building D, Room no. D2 05 2nd floor, Srinakarindra road, Suanluang, Bangkok, Thailand 10250"
+    "address":"เลขที่ 735/4 อาคาร D ห้องเลขที่ D2 05 ชั้นที่ 2 ถนนศรีนครินทร์ แขวงพัฒนาการ เขตสวนหลวง กรุงเทพมหานคร 10250"
   },
   "contact":{
-    "label":"Contacts",
+    "label":"ติดต่อเรา",
     "desc":"",
     "tel":[{
-        "label": "Phone",
+        "label": "โทรศัพท์",
         "content": "(+66) 093-939-2636"
     }],
     "email":[{
-        "label": "email",
+        "label": "อีเมล์",
         "content": ""
     }],
-    "fax":"Registration"
+    "fax":"093-939-2636"
   },
   "social":{
-    "label": "Social",
+    "label": "ช่องทางโซเชียลมีเดีย",
     "desc":"",
     "content": [{
-      "label": "Facebook",
+      "label": "เฟซบุ๊ก",
       "content": "",
       "link": "#"
     }]

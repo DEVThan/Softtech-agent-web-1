@@ -37,8 +37,8 @@ export default function ThemeToggle() {
     {/* <button onClick={toggleTheme} className="px-4 py-4 " >  {theme === "light" ? "🌞" : "🌙"} </button> */}
     <button onClick={toggleTheme}  className=" relative flex items-center justify-center  rounded-full  bg-[#0874B6]  border border-white" >  
       {  (theme === "light") 
-      ? <Image src="/front_images/icon/theme/light.png" alt="Logo" width={24} height={24} className="object-cover rounded-[10px] w-full h-full"/> 
-      : <Image src="/front_images/icon/theme/dark.png" alt="Logo" width={24} height={24} className="object-cover rounded-[10px] w-full h-full"/> 
+      ? <Image src="/front_images/icon/theme/light.png" alt="Logo" width={30} height={30} className="object-cover rounded-[10px] w-full h-full"/> 
+      : <Image src="/front_images/icon/theme/dark.png" alt="Logo" width={30} height={30} className="object-cover rounded-[10px] w-full h-full"/> 
       } 
     </button> 
   </>

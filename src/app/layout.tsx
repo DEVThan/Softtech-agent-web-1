@@ -27,12 +27,12 @@ export default function RootLayout({
     case "th":
       title = "Agent Softtechnw";
       description ="We specialize in providing software development services, including AI systems. Additionally, we are a distributor of satellite dishes and set-top boxes. Our goal is to meet the needs and offer the best solutions to our customers.";
-      fontLocale = "font-padauk";
+      fontLocale = "font-kanit";
       break;
     case "en":
       title = "Agent Softtechnw";
       description ="We specialize in providing software development services, including AI systems. Additionally, we are a distributor of satellite dishes and set-top boxes. Our goal is to meet the needs and offer the best solutions to our customers.";
-      fontLocale = "font-padauk";
+      fontLocale = "font-kanit";
       break;
     case "mm":
       title = "Agent Softtechnw";
@@ -53,7 +53,7 @@ export default function RootLayout({
         <meta name="description" content={description} />
         <link rel="icon" href="/front_images/Logo/sna_logo.png" type="image/png" sizes="32x32" />
         <link rel="apple-touch-icon" href="/front_images/Logo/sna_logo.png" />
-        <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&family=Padauk:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200;400&family=Padauk:wght@400;700&display=swap" rel="stylesheet" />
       </head>
 
       {/* <body className={`${outfit.className} ${fontLocale} dark:bg-gray-900`}> */}
