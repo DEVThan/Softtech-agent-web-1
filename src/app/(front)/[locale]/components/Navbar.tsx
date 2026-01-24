@@ -51,7 +51,11 @@ export default function Navbar({ nav }: NavbarProps) {
   ];
 
   return (
-    <header className="front-header bg-[#0874B6] dark:bg-gray-800  shadow  transition-colors px-6 sm:px-6 py-6">
+    // <header className="front-header bg-[#0874B6] dark:bg-gray-800  shadow  transition-colors px-6 sm:px-6 py-4">
+    <header className={ pathname === `/${params.locale}/home`
+        ? 'front-header font-extralight bg-[#0874B6] shadow  transition-colors px-6 py-4 rounded-bl-[0px] rounded-br-[0px]'
+        : 'front-header font-extralight bg-[#0874B6] shadow  transition-colors px-6 py-4 rounded-bl-[0px] rounded-br-[0px] sm:rounded-bl-[10px] sm:rounded-br-[10px]' 
+        } >
       <div className="flex items-center justify-between">
         <a  key={params.locale} href={`/${params.locale}/home`} className="text-2xl hover:underline">
           {/* <Image src="/front_images/Logo/sna_white_logo.png" alt="Logo" width={50} height={10} 
@@ -101,8 +105,8 @@ export default function Navbar({ nav }: NavbarProps) {
                 focus:outline-none focus:ring-none focus:ring-offset-none ">
                   {languages.map((lang, i) => ( lang.code === params.locale ? <Image key={`${lang.code}-${i}`} src={`${lang.icon}`} alt="Logo" width={30} height={30} className="object-cover rounded-[10px] w-full h-full"/>  : null)) }
                 </DropdownMenu.Trigger>
-                <DropdownMenu.Content side="bottom" align="end" className="relative bg-[#fff]/90 shadow-xl rounded-xl p-2 w-35  z-[9999]" >
-                  <div className="absolute bg-[#fff]/80 -top-1 right-2 w-5 h-3 rotate-45 "></div>
+                <DropdownMenu.Content side="bottom" align="end" className="relative mt-2 bg-[#fff]/90 shadow-xl rounded-xl p-2 w-35  z-[9999]" >
+                  {/* <div className="absolute bg-[#fff]/80 -top-1 right-2 w-5 h-3 rotate-45 "></div> */}
 
                   {languages.map((lang, i) => (
                     <DropdownMenu.Item

@@ -93,11 +93,23 @@ export default async function HomePage({ params }: PageProps) {
   };
 
   return (<>
+    <div className=" font-extralight mt-0 ">  
+      <div className=" relative grid grid-cols-1">
+          <Image src="/front_images/banner/Banner_M1_website_2026.jpg" alt="Logo" width={100} height={200}
+            className="object-contain w-full h-full
+            rounded-ml-[0px] rounded-mr-[0px] rounded-bl-[0px] rounded-br-[0px] 
+            sm:rounded-bl-[10px] sm:rounded-br-[10px]
+            md:rounded-bl-[10px] md:rounded-br-[10px]
+            lg:rounded-bl-[10px] lg:rounded-br-[10px]
+          " />
+      </div>
+    </div>
     <div className="content">
       {/* <div className="grid grid-cols-1 mt-0 sm:mt-4 md:mt-4 panel mb-4"> */}
         {/* <div>01</div> */}
         {/* <Carousel common={common} locale={locale} /> */}
-        <div className="section mt-0 sm:mt-2 md:mt-2">
+        
+        {/* <div className="section mt-0 sm:mt-2 md:mt-2">
           <div className="flex justify-center items-center w-full  pt-4">
             <div className="w-full flex justify-center items-center">
               <Image src="/front_images/banner/Banner_M1_website_2026.jpg" alt="Logo"
@@ -105,7 +117,8 @@ export default async function HomePage({ params }: PageProps) {
                 className="rounded-[10px] object-contain w-full h-full" />
             </div>
           </div>
-        </div>
+        </div> */}
+
       {/* </div> */}
 
       <div className="section mt-0 sm:mt-2 md:mt-8">

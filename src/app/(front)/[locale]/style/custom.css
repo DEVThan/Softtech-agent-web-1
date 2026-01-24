@@ -120,10 +120,10 @@ footer label, footer span{
 
     /* Navbar */
     .front-header {
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
+        /* border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px; */
     }
-    .front-header .logos {width: auto; height: 65px;}
+    .front-header .logos {width: auto; height: 45px;}
 
     .section {padding: 17px;}
     /* Panel */
@@ -145,7 +145,7 @@ footer label, footer span{
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
     }
-    footer .logos {width: auto; height: 65px;}
+    footer .logos {width: auto; height: 45px;}
 }
 
 /* >= 640px */
@@ -154,10 +154,10 @@ footer label, footer span{
 
     /* Navbar */
     .front-header {
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        /* border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px; */
     }
-    .front-header .logos {width: auto; height: 55px;}
+    .front-header .logos {width: auto; height: 45px;}
     .front-header nav {font-size: .7rem; }
 
     /* .section {padding: 5px;} */
@@ -181,7 +181,7 @@ footer label, footer span{
         border-top-right-radius: 10px;
         margin-top: 1rem;
     }
-    footer .logos {width: auto; height: 55px;}
+    footer .logos {width: auto; height: 45px;}
 }
 
 /* >= 768px */
@@ -190,10 +190,10 @@ footer label, footer span{
 
     /* Navbar */
     .front-header {
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        /* border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px; */
     }
-    .front-header .logos {width: auto; height: 55px;}
+    .front-header .logos {width: auto; height: 45px;}
     .front-header nav {font-size: .8rem; }
 
     /* Panel */
@@ -216,7 +216,7 @@ footer label, footer span{
         border-top-right-radius: 10px;
         margin-top: 1rem;
     }
-    footer .logos {width: auto; height: 55px;}
+    footer .logos {width: auto; height: 45px;}
 }
 
 /* >= 1024px */
@@ -225,10 +225,10 @@ footer label, footer span{
 
     /* Navbar */
     .front-header {
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        /* border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px; */
     }
-    .front-header .logos {width: auto; height: 55px;}
+    .front-header .logos {width: auto; height: 45px;}
     .front-header nav {font-size: .8rem; }
 
     /* Panel */
@@ -252,5 +252,5 @@ footer label, footer span{
         border-top-right-radius: 10px;
         margin-top: 1rem;
     }
-    footer .logos {width: auto; height: 55px;}
+    footer .logos {width: auto; height: 45px;}
 }
