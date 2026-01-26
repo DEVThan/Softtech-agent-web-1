@@ -28,6 +28,12 @@ import  { getLocaleFromSubdomain }  from "@/lib/function";
 //     "This is Next.js Profile page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",
 // };
 
+interface showAlertModel {
+  variant: "warning" | "error" | "success" | "info";
+  title: string; 
+  message: string;
+}
+
 
 export default function Profile() {
   const { setUser } = useUser();
@@ -41,6 +47,9 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showFailAlert, setShowFailAlert] = useState(false);
+
+  const [showAlert, setShowAlert] = useState(false);
+  const [showAlertJson, setShowAlertJson] = useState<showAlertModel | null>(null);
   // const [editformData, setEditFormData] = useState<AgentModel | null>(null);
 
   // async function fetchProfile() {
@@ -94,6 +103,22 @@ export default function Profile() {
 
   if (loading) return <p>Loading profile...</p>;
   if (!agent) return <p>No profile data.</p>;
+
+  const checkLocationPermission = async (): Promise<PermissionState> => {
+      if (!navigator.permissions) { return "prompt"; }
+      const result = await navigator.permissions.query({ name: "geolocation", });
+      return result.state; // "granted" | "prompt" | "denied"
+  };
+
+  const getCurrentLocation = (): Promise<GeolocationPosition> => {
+      return new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+          });
+      });
+  };
   
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
   // const onSubmit = async (data: AgentModel) => {
@@ -102,6 +127,30 @@ export default function Profile() {
     try {
       const formData = new FormData(e.currentTarget);
       const token = localStorage.getItem("token");
+
+      let lat = "";
+      let lng = "";
+      const permission = await checkLocationPermission();
+      if (permission === "denied") {
+          setShowAlertJson({
+            variant: "warning",
+            title: "Location Access Required",
+            message: "Please allow location access so we can continue.",
+          });
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
+      }else { 
+        const position = await getCurrentLocation();
+        const { latitude, longitude } = position.coords;
+        lat = latitude.toString();
+        lng = longitude.toString();
+      }
+
+      formData.append("lat", lat.toString());
+      formData.append("lng", lng.toString());
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/update_profile`, {
           method: "POST",
           headers: {
@@ -110,42 +159,22 @@ export default function Profile() {
               "Authorization": `Bearer ${token}`,
           },
           // body: JSON.stringify(data),
-           body: formData,
+          body: formData,
       });
       const res = await response.json();
       if (res.status) {
         // setAgent(responsive.result[0]);
         // console.log(res);
         const agentResult = res.result[0];
-
-       // update localStorage
-        // localStorage.setItem("agentname", res.result.agentname);
-        // localStorage.setItem("agentsurname", res.result.agentsurname);
-        // localStorage.setItem("emailaddress", res.result.emailaddress);
-        // localStorage.setItem("profilethumnal", res.result.thumnal);
-        // setLocalStorageAgentName(localStorage.getItem("agentname") || "");
-        // setLocalStorageAgentsurname(localStorage.getItem("agentsurname") || "");
-        // setLocalStorageAgentemailaddress(localStorage.getItem("emailaddress") || "");
-        // setLocalStorageProfileThumnal(localStorage.getItem("profilethumnal") || "");
-
         setUser(agentResult.agentname, agentResult.agentsurname, agentResult.telephone, agentResult.emailaddress, agentResult.province, agentResult.thumbnail );
-        
-
-
+      
         await fetchProfile();// ✅ reload profile
-
-
-        // const storedName = localStorage.getItem("agentname");
-        // if (storedName) setAgentName(storedName);
-        // const storedSurName = localStorage.getItem("agentsurname");
-        // if (storedSurName) setAgentSurName(storedSurName);
-        // const storedEmailAddress = localStorage.getItem("emailaddress");
-        // if (storedEmailAddress) setEmailAddress(storedEmailAddress);
 
         setShowFailAlert(false);
         setShowSuccessAlert(true); // ✅ แสดง Alert
         setTimeout(() => setShowSuccessAlert(false), 3000);
         // closeModal();
+      
       } else {
         console.error("API Error:", res.message);
         setShowSuccessAlert(false);
@@ -194,6 +223,25 @@ export default function Profile() {
                 transition={{ duration: 1 }}
               >
                 <Alert variant="warning" title="Warning Message"  message="Data has been updated un successfully." showLink={false} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {showAlert && showAlertJson && (
+              <motion.div
+                key="alert"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 1 }}
+              >
+                <Alert
+                  variant={showAlertJson?.variant ?? "info"}
+                  title={showAlertJson?.title ?? ""}
+                  message={showAlertJson?.message ?? ""}
+                  showLink={false}
+                />
               </motion.div>
             )}
           </AnimatePresence>
